@@ -4,7 +4,7 @@ Static ticket tracker built in the same visual style as `fox-time-tracker`.
 
 ## Features
 
-- Create ticket entries with title, submitted date, completed date, status, and details
+- Create ticket entries with title, creator, closer, submitted date, completed date, status, and details
 - Unique ticket ID validation across create, edit, and CSV import
 - Rectangular ticket cards
 - `In Progress` status uses yellow
@@ -17,12 +17,12 @@ Static ticket tracker built in the same visual style as `fox-time-tracker`.
 - Archive / restore support
 - Search by ticket ID, title, details, and notes
 - CSV import and export with the same round-trip format
-- Shared repo-backed storage in [`data/tickets.json`](data/tickets.json) when served through the local server
-- Browser `localStorage` fallback when the app is opened directly from the filesystem
+- Repository-backed storage exclusively in [`data/tickets.json`](data/tickets.json)
+- Atomic, validated saves with stale-session protection
 
 ## Usage
 
-Run the local server for shared data across browsers:
+Run the local server to load and update tickets:
 
 ```bash
 node server.js
@@ -30,4 +30,4 @@ node server.js
 
 Then open `http://127.0.0.1:4173` in any browser on the same machine.
 
-If you open `index.html` directly, the app still works, but saves only to that browser's local storage.
+The server is required for editing. The app does not read or write browser storage; every successful ticket update has already been persisted to `data/tickets.json` by the server.

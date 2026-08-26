@@ -40,6 +40,18 @@
             <input id="ticketTitle" type="text" placeholder="Example: Payment page review" />
           </label>
 
+          <div class="field-grid people-grid">
+            <label class="field">
+              <span class="field-label">Created by</span>
+              <input id="ticketCreatedBy" type="text" placeholder="Name of requester or creator" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Closed by</span>
+              <input id="ticketClosedBy" type="text" placeholder="Name of person who closed it" />
+            </label>
+          </div>
+
           <div class="field-grid">
             <label class="field">
               <span class="field-label">Date Submitted</span>
@@ -77,7 +89,6 @@
             <button id="addTicketBtn" class="btn-primary" type="button">Add Ticket</button>
             <button id="importCsvBtn" class="btn-ok" type="button">Import CSV</button>
             <button id="exportCsvBtn" class="btn-info" type="button">Export CSV</button>
-            <button id="promoteStorageBtn" class="hidden" type="button">Promote Browser Data</button>
             <button id="clearFormBtn" type="button">Clear Form</button>
             <input id="csvImportInput" type="file" accept=".csv,text/csv" hidden />
             <span class="muted">Sorted with In Progress first, then newer submitted dates.</span>
@@ -92,7 +103,7 @@
 
           <label class="field search-field">
             <span class="field-label">Search Tickets</span>
-            <input id="ticketSearch" type="search" placeholder="Search by ID, title, details, or notes" />
+            <input id="ticketSearch" type="search" placeholder="Search by ID, title, people, details, or notes" />
           </label>
         </div>
         <div class="ticket-list" id="ticketList"></div>
@@ -151,6 +162,18 @@
               <span class="field-label">Title</span>
               <input id="detailsTitle" type="text" />
             </label>
+
+            <div class="field-grid people-grid">
+              <label class="field">
+                <span class="field-label">Created by</span>
+                <input id="detailsCreatedBy" type="text" />
+              </label>
+
+              <label class="field">
+                <span class="field-label">Closed by</span>
+                <input id="detailsClosedBy" type="text" />
+              </label>
+            </div>
 
             <div class="field-grid">
               <label class="field">

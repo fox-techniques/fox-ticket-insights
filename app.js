@@ -1,15 +1,12 @@
-const TICKETS_KEY = "ftt.tickets";
-const SELECTED_KEY = "ftt.selectedId";
-const SHOW_ARCHIVED_KEY = "ftt.showArchived";
-const REPO_TARGET_KEY = "ftt.repoTargetBaseUrl";
 const TICKETS_API_PATH = "/api/tickets";
-const DEFAULT_REPO_TARGET = "http://127.0.0.1:4173";
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const CSV_EXPORT_HEADERS = [
   "id",
   "ticketCode",
   "title",
+  "createdBy",
+  "closedBy",
   "status",
   "highPriority",
   "submittedDate",
@@ -25,6 +22,8 @@ const CSV_HEADER_ALIASES = {
   id: ["id"],
   ticketCode: ["ticketcode", "ticketid"],
   title: ["title"],
+  createdBy: ["createdby", "creator", "requester"],
+  closedBy: ["closedby", "closer"],
   status: ["status"],
   highPriority: ["highpriority"],
   submittedDate: ["submitteddate", "datesubmitted"],
@@ -69,9 +68,13 @@ const STATUS_CONFIG = {
 
 const state = {
   tickets: [],
+  selectedId: "",
+  showArchived: false,
   searchQuery: "",
-  storageMode: "loading",
-  isPromoting: false
+  repositoryVersion: "",
+  repositoryReady: false,
+  repositoryError: "",
+  isSaving: false
 };
 
 const $ = (id) => document.getElementById(id);
@@ -81,6 +84,8 @@ const el = {
   showArchivedState: $("showArchivedState"),
   ticketCode: $("ticketCode"),
   ticketTitle: $("ticketTitle"),
+  ticketCreatedBy: $("ticketCreatedBy"),
+  ticketClosedBy: $("ticketClosedBy"),
   ticketSubmitted: $("ticketSubmitted"),
   ticketSubmittedDisplay: $("ticketSubmittedDisplay"),
   ticketCompleted: $("ticketCompleted"),
@@ -90,7 +95,6 @@ const el = {
   addTicketBtn: $("addTicketBtn"),
   importCsvBtn: $("importCsvBtn"),
   exportCsvBtn: $("exportCsvBtn"),
-  promoteStorageBtn: $("promoteStorageBtn"),
   clearFormBtn: $("clearFormBtn"),
   csvImportInput: $("csvImportInput"),
   queueMeta: $("queueMeta"),
@@ -108,6 +112,8 @@ const el = {
   detailsId: $("detailsId"),
   detailsCode: $("detailsCode"),
   detailsTitle: $("detailsTitle"),
+  detailsCreatedBy: $("detailsCreatedBy"),
+  detailsClosedBy: $("detailsClosedBy"),
   detailsSubmitted: $("detailsSubmitted"),
   detailsSubmittedDisplay: $("detailsSubmittedDisplay"),
   detailsCompleted: $("detailsCompleted"),
@@ -126,23 +132,6 @@ const el = {
   noteList: $("noteList"),
   bannerText: $("bannerText")
 };
-
-function load(key, fallback) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) ?? fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function save(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-function loadBool(key, fallback) {
-  const value = load(key, fallback);
-  return typeof value === "boolean" ? value : fallback;
-}
 
 function todayInputValue() {
   const now = new Date();
@@ -371,6 +360,8 @@ function normalizeTicket(ticket) {
     ticketCode: normalizeTicketCode(ticket?.ticketCode),
     highPriority: parseBoolean(ticket?.highPriority),
     title: String(ticket?.title ?? "").trim() || "Untitled Ticket",
+    createdBy: String(ticket?.createdBy ?? "").trim(),
+    closedBy: String(ticket?.closedBy ?? "").trim(),
     submittedDate: normalizeDateString(ticket?.submittedDate) || todayInputValue(),
     completedDate: normalizeDateString(ticket?.completedDate),
     status: normalizeStatus(ticket?.status),
@@ -386,38 +377,24 @@ function normalizeTicket(ticket) {
   };
 }
 
-function getCachedTickets() {
-  return load(TICKETS_KEY, []).map(normalizeTicket);
-}
-
-function cacheTicketsLocally(tickets) {
-  save(TICKETS_KEY, tickets.map(normalizeTicket));
-}
-
 function getTickets() {
   return state.tickets.slice();
 }
 
 function getSelectedId() {
-  const selectedId = load(SELECTED_KEY, "");
-  return typeof selectedId === "string" ? selectedId : "";
+  return state.selectedId;
 }
 
 function setSelectedId(ticketId) {
-  if (ticketId) {
-    save(SELECTED_KEY, ticketId);
-    return;
-  }
-
-  localStorage.removeItem(SELECTED_KEY);
+  state.selectedId = typeof ticketId === "string" ? ticketId : "";
 }
 
 function isShowArchivedEnabled() {
-  return loadBool(SHOW_ARCHIVED_KEY, false);
+  return state.showArchived;
 }
 
 function setShowArchivedEnabled(value) {
-  save(SHOW_ARCHIVED_KEY, Boolean(value));
+  state.showArchived = Boolean(value);
 }
 
 function getStatusConfig(status) {
@@ -429,36 +406,8 @@ function isTerminalStatus(status) {
   return safe === "completed" || safe === "canceled";
 }
 
-function isRepoStorageAvailable() {
-  return window.location.protocol === "http:" || window.location.protocol === "https:";
-}
-
-function normalizeRepoBaseUrl(value) {
-  const raw = String(value ?? "").trim();
-  if (!raw) return "";
-
-  try {
-    const parsed = new URL(raw);
-    if (!["http:", "https:"].includes(parsed.protocol)) {
-      return "";
-    }
-
-    const safePath = parsed.pathname
-      .replace(/\/api\/tickets\/?$/, "")
-      .replace(/\/+$/, "");
-    return `${parsed.origin}${safePath}`;
-  } catch {
-    return "";
-  }
-}
-
-function buildRepoApiUrl(baseUrl = window.location.origin) {
-  const safeBaseUrl = normalizeRepoBaseUrl(baseUrl);
-  return safeBaseUrl ? `${safeBaseUrl}${TICKETS_API_PATH}` : TICKETS_API_PATH;
-}
-
-async function loadTicketsFromRepo(apiUrl = TICKETS_API_PATH) {
-  const response = await fetch(apiUrl, {
+async function loadTicketsFromRepo() {
+  const response = await fetch(TICKETS_API_PATH, {
     cache: "no-store",
     headers: {
       Accept: "application/json"
@@ -474,64 +423,91 @@ async function loadTicketsFromRepo(apiUrl = TICKETS_API_PATH) {
     throw new Error("Repo data payload is not an array.");
   }
 
-  return payload.map(normalizeTicket);
+  return {
+    tickets: payload.map(normalizeTicket),
+    version: response.headers.get("ETag") || ""
+  };
 }
 
-async function saveTicketsToRepo(tickets, apiUrl = TICKETS_API_PATH) {
-  const response = await fetch(apiUrl, {
+async function getApiError(response, fallback) {
+  try {
+    const payload = await response.json();
+    return typeof payload?.error === "string" ? payload.error : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+async function saveTicketsToRepo(tickets) {
+  const response = await fetch(TICKETS_API_PATH, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "If-Match": state.repositoryVersion
     },
     body: JSON.stringify(tickets.map(normalizeTicket))
   });
 
   if (!response.ok) {
-    throw new Error(`Could not save repo data: ${response.status}`);
+    const error = new Error(await getApiError(response, `Could not save repository data: ${response.status}`));
+    error.status = response.status;
+    throw error;
   }
+
+  const payload = await response.json();
+  if (!Array.isArray(payload)) {
+    throw new Error("Repository data payload is not an array.");
+  }
+
+  return {
+    tickets: payload.map(normalizeTicket),
+    version: response.headers.get("ETag") || ""
+  };
 }
 
 async function hydrateTickets() {
-  const cachedTickets = getCachedTickets();
-
-  if (isRepoStorageAvailable()) {
-    try {
-      const repoTickets = await loadTicketsFromRepo();
-      if (!repoTickets.length && cachedTickets.length) {
-        state.tickets = cachedTickets;
-        state.storageMode = "browser";
-        return;
-      }
-
-      state.tickets = repoTickets;
-      state.storageMode = "repo";
-      cacheTicketsLocally(repoTickets);
-      return;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  state.tickets = cachedTickets;
-  state.storageMode = "browser";
+  const repository = await loadTicketsFromRepo();
+  state.tickets = repository.tickets;
+  state.repositoryVersion = repository.version;
+  state.repositoryReady = true;
+  state.repositoryError = "";
 }
 
 async function saveTickets(nextTickets) {
-  const normalizedTickets = nextTickets.map(normalizeTicket);
-  state.tickets = normalizedTickets;
-  cacheTicketsLocally(normalizedTickets);
-
-  if (!isRepoStorageAvailable()) {
-    state.storageMode = "browser";
-    return;
+  if (!state.repositoryReady || state.isSaving) {
+    return false;
   }
 
+  const normalizedTickets = nextTickets.map(normalizeTicket);
+  state.isSaving = true;
+  setMutationControlsDisabled(true);
+
   try {
-    await saveTicketsToRepo(normalizedTickets);
-    state.storageMode = "repo";
+    const repository = await saveTicketsToRepo(normalizedTickets);
+    state.tickets = repository.tickets;
+    state.repositoryVersion = repository.version;
+    state.repositoryError = "";
+    return true;
   } catch (error) {
     console.error(error);
-    state.storageMode = "browser";
+    const saveError = error instanceof Error ? error.message : "Could not save repository data.";
+    state.repositoryError = saveError;
+
+    if (error?.status === 412) {
+      try {
+        await hydrateTickets();
+        state.repositoryError = `${saveError} The latest repository data has been loaded; retry your change.`;
+      } catch (reloadError) {
+        console.error(reloadError);
+      }
+    }
+
+    alert(state.repositoryError);
+    render();
+    return false;
+  } finally {
+    state.isSaving = false;
+    setMutationControlsDisabled(!state.repositoryReady);
   }
 }
 
@@ -620,6 +596,8 @@ function getTicketSearchBlob(ticket) {
   return [
     ticket.ticketCode,
     ticket.title,
+    ticket.createdBy,
+    ticket.closedBy,
     getStatusConfig(ticket.status).label,
     ticket.details,
     ...ticket.notes.map((note) => note.text)
@@ -666,6 +644,8 @@ function getSelectedTicket(tickets, showArchived, searchQuery) {
 function clearCreateForm() {
   el.ticketCode.value = "";
   el.ticketTitle.value = "";
+  el.ticketCreatedBy.value = "";
+  el.ticketClosedBy.value = "";
   el.ticketSubmitted.value = todayInputValue();
   el.ticketCompleted.value = "";
   el.ticketStatus.value = "inprogress";
@@ -756,6 +736,8 @@ function buildTicketFromCreateForm() {
     ticketCode,
     highPriority: false,
     title,
+    createdBy: el.ticketCreatedBy.value.trim(),
+    closedBy: el.ticketClosedBy.value.trim(),
     submittedDate,
     completedDate: safeCompletedDate,
     status,
@@ -794,6 +776,8 @@ function renderDetails(ticket) {
     el.detailsId.value = "";
     el.detailsCode.value = "";
     el.detailsTitle.value = "";
+    el.detailsCreatedBy.value = "";
+    el.detailsClosedBy.value = "";
     el.detailsSubmitted.value = todayInputValue();
     el.detailsCompleted.value = "";
     el.detailsStatus.value = "inprogress";
@@ -816,6 +800,8 @@ function renderDetails(ticket) {
   el.detailsId.value = ticket.id;
   el.detailsCode.value = ticket.ticketCode;
   el.detailsTitle.value = ticket.title;
+  el.detailsCreatedBy.value = ticket.createdBy;
+  el.detailsClosedBy.value = ticket.closedBy;
   el.detailsSubmitted.value = ticket.submittedDate;
   el.detailsCompleted.value = ticket.completedDate;
   el.detailsStatus.value = ticket.status;
@@ -830,6 +816,8 @@ function renderDetails(ticket) {
   const archivedText = ticket.archived ? "Yes" : "No";
   el.detailsMeta.textContent = [
     `Ticket ID ${ticket.ticketCode || "—"}`,
+    `Created by ${ticket.createdBy || "—"}`,
+    `Closed by ${ticket.closedBy || "—"}`,
     `High Priority ${ticket.highPriority ? "Yes" : "No"}`,
     `Submitted ${formatDisplayDate(ticket.submittedDate)}`,
     `Completed ${formatDisplayDate(ticket.completedDate)}`,
@@ -872,6 +860,8 @@ function buildTicketCard(ticket, selectedId) {
           <div class="ticket-meta">
             <span>Submitted: ${escapeHtml(formatDisplayDate(ticket.submittedDate))}</span>
             <span>Completed: ${escapeHtml(formatDisplayDate(ticket.completedDate))}</span>
+            <span>Created by: ${escapeHtml(ticket.createdBy || "—")}</span>
+            <span>Closed by: ${escapeHtml(ticket.closedBy || "—")}</span>
             <span>${pluralize(ticket.notes.length, "note")}${archivedLabel}</span>
           </div>
         </div>
@@ -914,21 +904,21 @@ function buildBannerHtml(tickets) {
 
 let detailsTrackSyncFrame = null;
 
-function buildStorageLabel() {
-  return state.storageMode === "repo" ? "Repo storage" : "Browser storage";
-}
+function setMutationControlsDisabled(disabled) {
+  [
+    el.addTicketBtn,
+    el.importCsvBtn,
+    el.saveTicketBtn,
+    el.priorityTicketBtn,
+    el.archiveTicketBtn,
+    el.addNoteBtn
+  ].forEach((button) => {
+    button.disabled = disabled;
+  });
 
-function shouldShowPromoteStorageButton() {
-  return state.storageMode === "browser" && getCachedTickets().length > 0;
-}
-
-function renderStorageActions() {
-  const showPromote = shouldShowPromoteStorageButton();
-  el.promoteStorageBtn.classList.toggle("hidden", !showPromote);
-  el.promoteStorageBtn.disabled = state.isPromoting;
-  el.promoteStorageBtn.textContent = state.isPromoting
-    ? "Promoting..."
-    : "Promote Browser Data";
+  el.ticketList.querySelectorAll("[data-act]").forEach((button) => {
+    button.disabled = disabled;
+  });
 }
 
 function getSelectedTicketCard(selectedId) {
@@ -988,13 +978,13 @@ function render() {
   el.countCanceled.textContent = String(counts.canceled);
   el.countArchived.textContent = String(archivedCount);
 
-  if (!tickets.length) {
-    el.status.textContent = `No tickets yet • ${buildStorageLabel()}`;
+  if (state.repositoryError) {
+    el.status.textContent = `Repository error: ${state.repositoryError}`;
+  } else if (!tickets.length) {
+    el.status.textContent = "No tickets yet • Repository JSON";
   } else {
-    el.status.textContent = `${pluralize(activeTickets.length, "ticket")} in queue • ${pluralize(archivedCount, "archived ticket")} • ${buildStorageLabel()}`;
+    el.status.textContent = `${pluralize(activeTickets.length, "ticket")} in queue • ${pluralize(archivedCount, "archived ticket")} • Repository JSON`;
   }
-
-  renderStorageActions();
 
   el.showArchivedBtn.classList.toggle("is-on", showArchived);
   el.showArchivedBtn.classList.toggle("is-off", !showArchived);
@@ -1017,66 +1007,8 @@ function render() {
 
   renderDetails(selectedTicket);
   el.bannerText.innerHTML = buildBannerHtml(tickets);
+  setMutationControlsDisabled(!state.repositoryReady || state.isSaving);
   scheduleDetailsTrackSync(selectedTicket?.id ?? "");
-}
-
-async function promoteBrowserStorageToRepo() {
-  const cachedTickets = getCachedTickets();
-  if (!cachedTickets.length) {
-    alert("No browser-stored tickets are available to promote.");
-    return;
-  }
-
-  let repoBaseUrl = window.location.origin;
-  if (!isRepoStorageAvailable()) {
-    const requestedBaseUrl = window.prompt(
-      "Enter the FOX Ticket Tracker server URL.",
-      load(REPO_TARGET_KEY, DEFAULT_REPO_TARGET)
-    );
-    if (requestedBaseUrl === null) {
-      return;
-    }
-
-    repoBaseUrl = normalizeRepoBaseUrl(requestedBaseUrl);
-    if (!repoBaseUrl) {
-      alert("Enter a valid http:// or https:// server URL.");
-      return;
-    }
-
-    save(REPO_TARGET_KEY, repoBaseUrl);
-  }
-
-  const confirmed = window.confirm(
-    `Replace repo storage with ${pluralize(cachedTickets.length, "ticket")} from browser storage?`
-  );
-  if (!confirmed) {
-    return;
-  }
-
-  state.isPromoting = true;
-  renderStorageActions();
-
-  try {
-    await saveTicketsToRepo(cachedTickets, buildRepoApiUrl(repoBaseUrl));
-
-    if (isRepoStorageAvailable()) {
-      state.tickets = cachedTickets.map(normalizeTicket);
-      state.storageMode = "repo";
-      cacheTicketsLocally(state.tickets);
-      render();
-    }
-
-    const successMessage = isRepoStorageAvailable()
-      ? `Promoted ${pluralize(cachedTickets.length, "ticket")} to repo storage.`
-      : `Promoted ${pluralize(cachedTickets.length, "ticket")} to ${repoBaseUrl}. Open the server-backed app there to keep working from repo storage.`;
-    alert(successMessage);
-  } catch (error) {
-    console.error(error);
-    alert(error instanceof Error ? error.message : "Could not promote browser data to repo storage.");
-  } finally {
-    state.isPromoting = false;
-    renderStorageActions();
-  }
 }
 
 async function addTicket() {
@@ -1085,7 +1017,7 @@ async function addTicket() {
 
   const tickets = getTickets();
   tickets.push(ticket);
-  await saveTickets(tickets);
+  if (!await saveTickets(tickets)) return;
   setSelectedId(ticket.id);
   clearCreateForm();
   render();
@@ -1107,6 +1039,8 @@ function exportTicketsCsv() {
       ticket.id,
       ticket.ticketCode,
       ticket.title,
+      ticket.createdBy,
+      ticket.closedBy,
       ticket.status,
       ticket.highPriority ? "true" : "false",
       ticket.submittedDate,
@@ -1260,6 +1194,8 @@ function buildImportedTickets(rows) {
       id: ticketId,
       ticketCode,
       title,
+      createdBy: getCsvCell(row, headerIndex, "createdBy"),
+      closedBy: getCsvCell(row, headerIndex, "closedBy"),
       status,
       highPriority: parseBoolean(getCsvCell(row, headerIndex, "highPriority")),
       submittedDate,
@@ -1289,7 +1225,7 @@ async function importTicketsFromCsvFile(file) {
   );
   if (!confirmed) return;
 
-  await saveTickets(importedTickets);
+  if (!await saveTickets(importedTickets)) return;
   setSelectedId(importedTickets[0]?.id ?? "");
   state.searchQuery = "";
   el.ticketSearch.value = "";
@@ -1338,7 +1274,7 @@ async function deleteTicket(ticketId) {
   const confirmed = confirm(`Are you sure you want to delete \"${ticket.title}\"? This cannot be undone.`);
   if (!confirmed) return;
 
-  await saveTickets(tickets.filter((item) => item.id !== ticketId));
+  if (!await saveTickets(tickets.filter((item) => item.id !== ticketId))) return;
   render();
 }
 
@@ -1382,6 +1318,8 @@ async function saveSelectedTicket() {
       ...ticket,
       ticketCode,
       title,
+      createdBy: el.detailsCreatedBy.value.trim(),
+      closedBy: el.detailsClosedBy.value.trim(),
       submittedDate,
       completedDate: safeCompletedDate,
       status,
@@ -1390,7 +1328,7 @@ async function saveSelectedTicket() {
     });
   });
 
-  await saveTickets(tickets);
+  if (!await saveTickets(tickets)) return;
   render();
 }
 
@@ -1404,7 +1342,7 @@ async function toggleTicketArchive(ticketId) {
     });
   });
 
-  await saveTickets(tickets);
+  if (!await saveTickets(tickets)) return;
   render();
 }
 
@@ -1418,7 +1356,7 @@ async function toggleTicketPriority(ticketId) {
     });
   });
 
-  await saveTickets(tickets);
+  if (!await saveTickets(tickets)) return;
   render();
 }
 
@@ -1448,7 +1386,7 @@ async function addNoteToSelectedTicket() {
     });
   });
 
-  await saveTickets(tickets);
+  if (!await saveTickets(tickets)) return;
   el.noteText.value = "";
   render();
 }
@@ -1477,9 +1415,6 @@ el.csvImportInput.addEventListener("change", async (event) => {
   }
 });
 el.exportCsvBtn.addEventListener("click", exportTicketsCsv);
-el.promoteStorageBtn.addEventListener("click", () => {
-  void promoteBrowserStorageToRepo();
-});
 el.clearFormBtn.addEventListener("click", clearCreateForm);
 el.ticketSearch.addEventListener("input", () => {
   state.searchQuery = normalizeSearchQuery(el.ticketSearch.value);
@@ -1573,7 +1508,17 @@ window.addEventListener("resize", () => {
 async function init() {
   clearCreateForm();
   el.status.textContent = "Loading tickets...";
-  await hydrateTickets();
+
+  try {
+    await hydrateTickets();
+  } catch (error) {
+    console.error(error);
+    state.repositoryReady = false;
+    state.repositoryError = error instanceof Error
+      ? error.message
+      : "Could not load repository data.";
+  }
+
   render();
 }
 

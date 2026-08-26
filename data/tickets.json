@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "ticket-1787769111637-j5cxyv",
+    "ticketCode": "123123",
+    "highPriority": true,
+    "title": "Thic one",
+    "createdBy": "",
+    "closedBy": "",
+    "submittedDate": "2026-08-26",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Hello",
+    "archived": false,
+    "createdAt": 1787769111637,
+    "updatedAt": 1787769185807,
+    "notes": []
+  }
+]
