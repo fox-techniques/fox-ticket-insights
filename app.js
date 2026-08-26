@@ -67,6 +67,20 @@ const STATUS_CONFIG = {
     badgeClass: "badge-canceled",
     cardClass: "status-canceled",
     bannerClass: "canceled"
+  },
+  abandoned: {
+    label: "Abandoned",
+    priority: 4,
+    badgeClass: "badge-abandoned",
+    cardClass: "status-abandoned",
+    bannerClass: "abandoned"
+  },
+  rejected: {
+    label: "Rejected",
+    priority: 5,
+    badgeClass: "badge-rejected",
+    cardClass: "status-rejected",
+    bannerClass: "rejected"
   }
 };
 
@@ -78,7 +92,8 @@ const state = {
   repositoryVersion: "",
   repositoryReady: false,
   repositoryError: "",
-  isSaving: false
+  isSaving: false,
+  analyticsOpen: false
 };
 
 const $ = (id) => document.getElementById(id);
@@ -110,6 +125,8 @@ const el = {
   countWaiting: $("countWaiting"),
   countCompleted: $("countCompleted"),
   countCanceled: $("countCanceled"),
+  countAbandoned: $("countAbandoned"),
+  countRejected: $("countRejected"),
   countArchived: $("countArchived"),
   detailsSection: $("detailsSection"),
   detailsTrack: $("detailsTrack"),
@@ -138,7 +155,19 @@ const el = {
   noteText: $("noteText"),
   addNoteBtn: $("addNoteBtn"),
   noteList: $("noteList"),
-  bannerText: $("bannerText")
+  bannerText: $("bannerText"),
+  analyticsBtn: $("analyticsBtn"),
+  analyticsView: $("analyticsView"),
+  closeAnalyticsBtn: $("closeAnalyticsBtn"),
+  resetAnalyticsBtn: $("resetAnalyticsBtn"),
+  analyticsRange: $("analyticsRange"),
+  analyticsGrouping: $("analyticsGrouping"),
+  analyticsStatus: $("analyticsStatus"),
+  analyticsPriority: $("analyticsPriority"),
+  analyticsCreator: $("analyticsCreator"),
+  analyticsCloser: $("analyticsCloser"),
+  analyticsScope: $("analyticsScope"),
+  analyticsContent: $("analyticsContent")
 };
 
 function todayInputValue() {
@@ -330,7 +359,9 @@ function parseImportedStatus(value) {
     waitingforapproval: "waiting",
     completed: "completed",
     canceled: "canceled",
-    cancelled: "canceled"
+    cancelled: "canceled",
+    abandoned: "abandoned",
+    rejected: "rejected"
   };
 
   return map[key] || normalizeStatus(raw);
@@ -413,7 +444,7 @@ function getStatusConfig(status) {
 
 function isTerminalStatus(status) {
   const safe = normalizeStatus(status);
-  return safe === "completed" || safe === "canceled";
+  return ["completed", "canceled", "abandoned", "rejected"].includes(safe);
 }
 
 async function loadTicketsFromRepo() {
@@ -635,7 +666,9 @@ function getCounts(tickets) {
     inprogress: 0,
     waiting: 0,
     completed: 0,
-    canceled: 0
+    canceled: 0,
+    abandoned: 0,
+    rejected: 0
   });
 }
 
@@ -910,6 +943,8 @@ function buildBannerHtml(tickets) {
   const inProgressCount = activeTickets.filter((ticket) => ticket.status === "inprogress").length;
   const completedCount = activeTickets.filter((ticket) => ticket.status === "completed").length;
   const canceledCount = activeTickets.filter((ticket) => ticket.status === "canceled").length;
+  const abandonedCount = activeTickets.filter((ticket) => ticket.status === "abandoned").length;
+  const rejectedCount = activeTickets.filter((ticket) => ticket.status === "rejected").length;
   const archivedCount = tickets.length - activeTickets.length;
 
   return [
@@ -918,8 +953,619 @@ function buildBannerHtml(tickets) {
     `<span class="proj inprogress">In Progress: ${inProgressCount}</span>`,
     `<span class="proj completed">Completed: ${completedCount}</span>`,
     `<span class="proj canceled">Canceled: ${canceledCount}</span>`,
+    `<span class="proj abandoned">Abandoned: ${abandonedCount}</span>`,
+    `<span class="proj rejected">Rejected: ${rejectedCount}</span>`,
     `<span class="proj archived">Archived: ${archivedCount}</span>`
   ].join('<span class="sep">◆</span>');
+}
+
+const ANALYTICS_STATUS_COLORS = {
+  inprogress: "#ffd166",
+  waiting: "#ff9800",
+  completed: "#8ed081",
+  canceled: "#8b96a2",
+  abandoned: "#7890a8",
+  rejected: "#ff7477"
+};
+
+function formatAnalyticsNumber(value, digits = 0) {
+  if (!Number.isFinite(value)) return "—";
+  return new Intl.NumberFormat("en-GB", {
+    maximumFractionDigits: digits,
+    minimumFractionDigits: digits
+  }).format(value);
+}
+
+function formatAnalyticsDays(value) {
+  if (!Number.isFinite(value)) return "—";
+  const digits = Number.isInteger(value) ? 0 : 1;
+  return `${formatAnalyticsNumber(value, digits)}d`;
+}
+
+function formatAnalyticsPercent(value) {
+  if (!Number.isFinite(value)) return "—";
+  return `${formatAnalyticsNumber(value, 1)}%`;
+}
+
+function buildAnalyticsComparison(current, previous, {
+  unit = "",
+  lowerIsBetter = false,
+  higherIsBetter = false
+} = {}) {
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) {
+    return { text: "No prior-period baseline", className: "" };
+  }
+
+  const difference = current - previous;
+  if (Math.abs(difference) < 0.05) {
+    return { text: "No change vs prior period", className: "" };
+  }
+
+  const rounded = Math.abs(difference) < 10
+    ? formatAnalyticsNumber(Math.abs(difference), 1)
+    : formatAnalyticsNumber(Math.abs(difference));
+  const direction = difference > 0 ? "+" : "−";
+  let className = "";
+  if (lowerIsBetter) className = difference < 0 ? "is-good" : "is-bad";
+  if (higherIsBetter) className = difference > 0 ? "is-good" : "is-bad";
+  return {
+    text: `${direction}${rounded}${unit} vs prior period`,
+    className
+  };
+}
+
+function renderAnalyticsKpi({
+  label,
+  description,
+  value,
+  comparison,
+  note = "",
+  technicalDefinition = "",
+  tone = "cyan",
+  index = 0
+}) {
+  const compare = comparison || { text: "", className: "" };
+  const valueClass = value.length > 13 ? " is-long" : "";
+  return `
+    <article class="analytics-kpi tone-${tone}" style="animation-delay:${index * 35}ms" title="${escapeHtml(technicalDefinition)}">
+      <div class="analytics-kpi-label">${escapeHtml(label)}</div>
+      <div class="analytics-kpi-description">${escapeHtml(description)}</div>
+      <div class="analytics-kpi-value${valueClass}">${escapeHtml(value)}</div>
+      <div class="analytics-kpi-compare ${compare.className}">${escapeHtml(compare.text)}</div>
+      ${note ? `<div class="analytics-kpi-note">${escapeHtml(note)}</div>` : ""}
+    </article>
+  `;
+}
+
+function renderAnalyticsPanelHeader(title, description, legend = "") {
+  return `
+    <div class="analytics-panel-head">
+      <div>
+        <h2>${escapeHtml(title)}</h2>
+        <p>${escapeHtml(description)}</p>
+      </div>
+      ${legend}
+    </div>
+  `;
+}
+
+function renderThroughputChart(trend) {
+  if (!trend.length) return '<div class="analytics-empty">No throughput data in this period.</div>';
+  const maximum = Math.max(1, ...trend.flatMap((bucket) => [
+    bucket.created,
+    bucket.completed,
+    bucket.unsuccessful
+  ]));
+
+  return `
+    <div class="analytics-throughput" aria-label="Received, completed, and unsuccessful ticket outcomes by period">
+      ${trend.map((bucket) => {
+        const height = (value) => value ? Math.max(4, (value / maximum) * 100) : 1;
+        return `
+          <div class="analytics-period-column">
+            <div class="analytics-period-bars">
+              <i class="analytics-bar created" style="height:${height(bucket.created)}%" title="${escapeHtml(`${bucket.label}: ${bucket.created} created`)}"></i>
+              <i class="analytics-bar completed" style="height:${height(bucket.completed)}%" title="${escapeHtml(`${bucket.label}: ${bucket.completed} completed`)}"></i>
+              <i class="analytics-bar unsuccessful" style="height:${height(bucket.unsuccessful)}%" title="${escapeHtml(`${bucket.label}: ${bucket.unsuccessful} unsuccessful outcomes`)}"></i>
+            </div>
+            <div class="analytics-period-label" title="${escapeHtml(bucket.label)}">${escapeHtml(bucket.label)}</div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function renderAnalyticsLineChart(trend, series) {
+  const width = 820;
+  const height = 240;
+  const paddingX = 42;
+  const paddingTop = 16;
+  const paddingBottom = 34;
+  const values = trend.flatMap((bucket) => series.map((item) => bucket[item.key]))
+    .filter(Number.isFinite);
+  if (!values.length) {
+    return '<div class="analytics-empty">Not enough completed-ticket data for this chart.</div>';
+  }
+
+  const maximum = Math.max(1, ...values);
+  const plotWidth = width - (paddingX * 2);
+  const plotHeight = height - paddingTop - paddingBottom;
+  const xFor = (index) => trend.length === 1
+    ? width / 2
+    : paddingX + ((index / (trend.length - 1)) * plotWidth);
+  const yFor = (value) => paddingTop + (plotHeight - ((value / maximum) * plotHeight));
+  const gridValues = [maximum, maximum / 2, 0];
+  const labelStep = Math.max(1, Math.ceil(trend.length / 7));
+
+  const paths = series.map((item) => {
+    const points = trend
+      .map((bucket, index) => ({ value: bucket[item.key], index, label: bucket.label }))
+      .filter((point) => Number.isFinite(point.value));
+    if (!points.length) return "";
+    const pointList = points.map((point) => `${xFor(point.index)},${yFor(point.value)}`).join(" ");
+    const circles = points.map((point) => `
+      <circle cx="${xFor(point.index)}" cy="${yFor(point.value)}" r="3.5" fill="${item.color}">
+        <title>${escapeHtml(`${point.label}: ${formatAnalyticsNumber(point.value, 1)}${item.unit || ""}`)}</title>
+      </circle>
+    `).join("");
+    return `
+      <polyline points="${pointList}" fill="none" stroke="${item.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      ${circles}
+    `;
+  }).join("");
+
+  const xLabels = trend.map((bucket, index) => {
+    if (index % labelStep !== 0 && index !== trend.length - 1) return "";
+    return `<text class="analytics-chart-axis" x="${xFor(index)}" y="${height - 8}" text-anchor="middle">${escapeHtml(bucket.label)}</text>`;
+  }).join("");
+
+  return `
+    <svg class="analytics-line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(series.map((item) => item.label).join(" and "))}">
+      ${gridValues.map((value) => {
+        const y = yFor(value);
+        return `
+          <line class="analytics-chart-grid" x1="${paddingX}" x2="${width - paddingX}" y1="${y}" y2="${y}"></line>
+          <text class="analytics-chart-axis" x="${paddingX - 8}" y="${y + 3}" text-anchor="end">${escapeHtml(formatAnalyticsNumber(value, value < 10 ? 1 : 0))}</text>
+        `;
+      }).join("")}
+      ${paths}
+      ${xLabels}
+    </svg>
+  `;
+}
+
+function renderAnalyticsBreakdown(rows, total, colorByKey = {}) {
+  if (!rows.some((row) => row.count)) {
+    return '<div class="analytics-empty">No tickets available for this breakdown.</div>';
+  }
+  const maximum = Math.max(1, ...rows.map((row) => row.count));
+  return `
+    <div class="analytics-breakdown">
+      ${rows.map((row) => `
+        <div class="analytics-breakdown-row">
+          <div class="analytics-breakdown-label">${escapeHtml(row.label)}</div>
+          <div class="analytics-meter"><span style="width:${(row.count / maximum) * 100}%;background:${colorByKey[row.key] || "#35e3db"}"></span></div>
+          <div class="analytics-breakdown-value">${row.count} · ${total ? formatAnalyticsPercent((row.count / total) * 100) : "0.0%"}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderStatusPanel(model) {
+  const labels = {
+    inprogress: "In Progress",
+    waiting: "Requires Approval",
+    completed: "Completed",
+    canceled: "Canceled",
+    abandoned: "Abandoned",
+    rejected: "Rejected"
+  };
+  const total = model.summary.createdCount;
+  const segments = model.statusBreakdown.map((item) => `
+    <span
+      class="analytics-status-segment"
+      style="width:${total ? (item.count / total) * 100 : 0}%;background:${ANALYTICS_STATUS_COLORS[item.status]}"
+      title="${escapeHtml(`${labels[item.status]}: ${item.count}`)}"
+    ></span>
+  `).join("");
+  const rows = model.statusBreakdown.map((item) => ({
+    key: item.status,
+    label: labels[item.status],
+    count: item.count
+  }));
+  return `
+    <div class="analytics-status-bar">${segments}</div>
+    ${renderAnalyticsBreakdown(rows, total, ANALYTICS_STATUS_COLORS)}
+  `;
+}
+
+function renderCreatorTable(model) {
+  if (!model.creators.length) return '<div class="analytics-empty">No creators in this period.</div>';
+  return `
+    <div class="analytics-table-wrap">
+      <table class="analytics-table">
+        <thead><tr><th>Created by</th><th>Tickets</th><th>Share</th><th>Completed</th><th>Cohort rate</th><th>High prio</th></tr></thead>
+        <tbody>
+          ${model.creators.map((row) => `
+            <tr>
+              <td class="analytics-person ${row.key === "__missing__" ? "is-missing" : ""}">${escapeHtml(row.name)}</td>
+              <td>${row.count}</td>
+              <td>${formatAnalyticsPercent((row.count / model.summary.createdCount) * 100)}</td>
+              <td>${row.completed}</td>
+              <td>${formatAnalyticsPercent((row.completed / row.count) * 100)}</td>
+              <td>${row.highPriority}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderCloserTable(model) {
+  if (!model.closers.length) return '<div class="analytics-empty">No closed tickets in this period.</div>';
+  return `
+    <div class="analytics-table-wrap">
+      <table class="analytics-table">
+        <thead><tr><th>Closed by</th><th>Closed</th><th>Share</th><th>Completed</th><th>Canceled</th><th>Abandoned</th><th>Rejected</th><th>Median</th><th>P90</th></tr></thead>
+        <tbody>
+          ${model.closers.map((row) => `
+            <tr>
+              <td class="analytics-person ${row.key === "__missing__" ? "is-missing" : ""}">${escapeHtml(row.name)}</td>
+              <td>${row.count}</td>
+              <td>${formatAnalyticsPercent((row.count / model.summary.terminalCount) * 100)}</td>
+              <td>${row.completed}</td>
+              <td>${row.canceled}</td>
+              <td>${row.abandoned}</td>
+              <td>${row.rejected}</td>
+              <td>${formatAnalyticsDays(row.medianResolution)}</td>
+              <td>${formatAnalyticsDays(row.p90Resolution)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderPriorityPanel(model) {
+  const rows = [
+    { label: "Created high priority", value: String(model.priority.created) },
+    { label: "Completed high priority", value: String(model.priority.completed) },
+    { label: "Open high priority", value: String(model.priority.open) },
+    { label: "Cohort completion rate", value: formatAnalyticsPercent(model.priority.cohortCompletionRate) },
+    { label: "Median resolution", value: formatAnalyticsDays(model.priority.medianResolution) }
+  ];
+  return `
+    <div class="analytics-quality-list">
+      ${rows.map((row) => `
+        <div class="analytics-quality-item">
+          <span>${escapeHtml(row.label)}</span>
+          <strong>${escapeHtml(row.value)}</strong>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderQualityPanel(model) {
+  return `
+    <div class="analytics-quality-list">
+      ${model.quality.map((item) => `
+        <div class="analytics-quality-item">
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${item.count}</strong>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function analyticsTicketLabel(item) {
+  if (!item?.ticket) return "—";
+  return item.ticket.ticketCode || item.ticket.title || "Untitled ticket";
+}
+
+function renderHighlights(model) {
+  const highlights = model.highlights;
+  const netFlowLabel = highlights.netFlow > 0
+    ? `+${highlights.netFlow}`
+    : String(highlights.netFlow);
+  const cards = [
+    {
+      label: "Net ticket flow",
+      value: netFlowLabel,
+      note: highlights.netFlow > 0
+        ? "More tickets entered than reached a terminal state"
+        : highlights.netFlow < 0
+          ? "The team reduced the reconstructed backlog"
+          : "Incoming and terminal-state volume were balanced"
+    },
+    {
+      label: "Peak intake period",
+      value: highlights.peak?.label || "—",
+      note: highlights.peak ? pluralize(highlights.peak.created, "ticket") + " created" : "No intake data"
+    },
+    {
+      label: "Fastest completion",
+      value: analyticsTicketLabel(highlights.fastest),
+      note: highlights.fastest ? `${formatAnalyticsDays(highlights.fastest.days)} resolution` : "No completed tickets"
+    },
+    {
+      label: "Slowest completion",
+      value: analyticsTicketLabel(highlights.slowest),
+      note: highlights.slowest ? `${formatAnalyticsDays(highlights.slowest.days)} resolution` : "No completed tickets"
+    },
+    {
+      label: "Oldest open ticket",
+      value: analyticsTicketLabel(highlights.oldestOpen),
+      note: highlights.oldestOpen ? `${formatAnalyticsDays(highlights.oldestOpen.days)} open at period end` : "No open tickets"
+    },
+    {
+      label: "Highest closure volume",
+      value: highlights.busiestCloser?.name || "—",
+      note: highlights.busiestCloser ? pluralize(highlights.busiestCloser.count, "closure") : "No closure data"
+    }
+  ];
+
+  return `<div class="analytics-highlights">${cards.map((card) => `
+    <article class="analytics-highlight">
+      <div class="analytics-highlight-label">${escapeHtml(card.label)}</div>
+      <div class="analytics-highlight-value">${escapeHtml(card.value)}</div>
+      <div class="analytics-highlight-note">${escapeHtml(card.note)}</div>
+    </article>
+  `).join("")}</div>`;
+}
+
+function getAnalyticsSettings() {
+  return {
+    range: el.analyticsRange.value,
+    grouping: el.analyticsGrouping.value,
+    status: el.analyticsStatus.value,
+    priority: el.analyticsPriority.value,
+    creator: el.analyticsCreator.value,
+    closer: el.analyticsCloser.value,
+    today: todayInputValue()
+  };
+}
+
+function syncAnalyticsPersonSelect(select, people, allLabel) {
+  const selectedValue = select.value || "all";
+  select.replaceChildren();
+  select.add(new Option(allLabel, "all"));
+  people.forEach((person) => {
+    select.add(new Option(`${person.label} (${person.count})`, person.key));
+  });
+  select.value = [...select.options].some((option) => option.value === selectedValue)
+    ? selectedValue
+    : "all";
+}
+
+function syncAnalyticsPersonFilters() {
+  const analytics = window.FoxTicketAnalytics;
+  if (!analytics) return;
+  const tickets = getTickets();
+  syncAnalyticsPersonSelect(
+    el.analyticsCreator,
+    analytics.collectPeople(tickets, "createdBy"),
+    "All creators"
+  );
+  syncAnalyticsPersonSelect(
+    el.analyticsCloser,
+    analytics.collectPeople(tickets, "closedBy"),
+    "All closers"
+  );
+}
+
+function renderAnalytics() {
+  const analytics = window.FoxTicketAnalytics;
+  if (!analytics) {
+    el.analyticsContent.innerHTML = '<div class="analytics-empty">Analytics engine could not be loaded.</div>';
+    return;
+  }
+
+  const model = analytics.buildModel(getTickets(), getAnalyticsSettings());
+  const summary = model.summary;
+  const previous = model.previous;
+  const periodStart = formatDisplayDate(analytics.toIsoDate(model.period.start));
+  const periodEnd = formatDisplayDate(analytics.toIsoDate(model.period.end));
+  const groupingLabel = `${model.period.grouping[0].toUpperCase()}${model.period.grouping.slice(1)}ly`;
+  const activeFilters = [
+    model.settings.status !== "all",
+    model.settings.priority !== "all",
+    model.settings.creator !== "all",
+    model.settings.closer !== "all"
+  ].filter(Boolean).length;
+  el.analyticsScope.textContent = `${periodStart} to ${periodEnd} · ${groupingLabel} trend · ${pluralize(model.totalTickets, "ticket")} in repository scope${activeFilters ? ` · ${activeFilters} active filters` : ""}`;
+
+  const kpis = [
+    {
+      label: "Repository tickets",
+      description: "All tickets matching the current filters",
+      value: formatAnalyticsNumber(model.totalTickets),
+      comparison: { text: "Current filtered dataset", className: "" },
+      technicalDefinition: "Total tickets in tickets.json after applying status, priority, creator, and closer filters."
+    },
+    {
+      label: "Tickets created",
+      description: "Tickets submitted during the selected period",
+      value: formatAnalyticsNumber(summary.createdCount),
+      comparison: buildAnalyticsComparison(summary.createdCount, previous?.createdCount)
+    },
+    {
+      label: "Tickets completed",
+      description: "Successful completions during the period",
+      value: formatAnalyticsNumber(summary.completedCount),
+      comparison: buildAnalyticsComparison(summary.completedCount, previous?.completedCount, { higherIsBetter: true }),
+      tone: "green"
+    },
+    {
+      label: "Tickets canceled",
+      description: "Canceled tickets closed during the period",
+      value: formatAnalyticsNumber(summary.canceledCount),
+      comparison: buildAnalyticsComparison(summary.canceledCount, previous?.canceledCount, { lowerIsBetter: true }),
+      tone: "amber"
+    },
+    {
+      label: "Open at period end",
+      description: "In Progress or Requires Approval tickets",
+      value: formatAnalyticsNumber(summary.openCount),
+      comparison: buildAnalyticsComparison(summary.openCount, previous?.openCount, { lowerIsBetter: true }),
+      tone: "amber"
+    },
+    {
+      label: "Cohort completion",
+      description: "Share of tickets received that are now completed",
+      value: formatAnalyticsPercent(summary.completionRate),
+      comparison: buildAnalyticsComparison(summary.completionRate, previous?.completionRate, { unit: " pts", higherIsBetter: true }),
+      technicalDefinition: "Percentage of tickets submitted in the selected period whose current status is completed."
+    },
+    {
+      label: "Median resolution",
+      description: "Typical completion time in calendar days",
+      value: formatAnalyticsDays(summary.medianResolution),
+      comparison: buildAnalyticsComparison(summary.medianResolution, previous?.medianResolution, { unit: "d", lowerIsBetter: true }),
+      technicalDefinition: "Median calendar days from submitted date to completed date for completed tickets."
+    },
+    {
+      label: "P90 resolution",
+      description: "90% of completed tickets finished within this time",
+      value: formatAnalyticsDays(summary.p90Resolution),
+      comparison: buildAnalyticsComparison(summary.p90Resolution, previous?.p90Resolution, { unit: "d", lowerIsBetter: true }),
+      technicalDefinition: "90th percentile calendar-day resolution time for completed tickets."
+    },
+    {
+      label: "Average open age",
+      description: "Average age of the currently active workload",
+      value: formatAnalyticsDays(summary.averageOpenAge),
+      comparison: buildAnalyticsComparison(summary.averageOpenAge, previous?.averageOpenAge, { unit: "d", lowerIsBetter: true }),
+      tone: "amber"
+    },
+    {
+      label: "High priority open",
+      description: "Active tickets currently marked high priority",
+      value: formatAnalyticsNumber(summary.highPriorityOpenCount),
+      comparison: buildAnalyticsComparison(summary.highPriorityOpenCount, previous?.highPriorityOpenCount, { lowerIsBetter: true }),
+      tone: "red"
+    }
+  ];
+
+  const throughputLegend = `
+    <div class="analytics-legend">
+      <span><i style="background:#35e3db"></i>Created</span>
+      <span><i style="background:#8ed081"></i>Completed</span>
+      <span><i style="background:#8b96a2"></i>Not completed</span>
+    </div>
+  `;
+  const backlogLegend = '<div class="analytics-legend"><span><i style="background:#35e3db"></i>Open backlog</span></div>';
+  const resolutionLegend = `
+    <div class="analytics-legend">
+      <span><i style="background:#8ed081"></i>Median</span>
+      <span><i style="background:#ffd166"></i>P90</span>
+    </div>
+  `;
+  const ageColors = ["#8ed081", "#35e3db", "#ffd166", "#ff9800", "#ff7477"];
+  const ageColorMap = Object.fromEntries(model.ageBuckets.map((row, index) => [String(index), ageColors[index]]));
+  const ageRows = model.ageBuckets.map((row, index) => ({ key: String(index), ...row }));
+
+  el.analyticsContent.innerHTML = `
+    <section class="analytics-kpis">
+      ${kpis.map((kpi, index) => renderAnalyticsKpi({ ...kpi, index })).join("")}
+    </section>
+
+    <section class="analytics-grid">
+      <article class="analytics-panel analytics-span-8">
+        ${renderAnalyticsPanelHeader("Ticket flow", "Created versus terminal-state throughput by period", throughputLegend)}
+        ${renderThroughputChart(model.trend)}
+      </article>
+
+      <article class="analytics-panel analytics-span-4">
+        ${renderAnalyticsPanelHeader("Cohort status", "Current status of tickets submitted in this period")}
+        ${renderStatusPanel(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-6">
+        ${renderAnalyticsPanelHeader("Backlog over time", "Reconstructed open tickets at each period end", backlogLegend)}
+        ${renderAnalyticsLineChart(model.trend, [
+          { key: "backlog", label: "Open backlog", color: "#35e3db" }
+        ])}
+      </article>
+
+      <article class="analytics-panel analytics-span-6">
+        ${renderAnalyticsPanelHeader("Resolution trend", "Calendar-day median and P90 for completed tickets", resolutionLegend)}
+        ${renderAnalyticsLineChart(model.trend, [
+          { key: "medianResolution", label: "Median resolution", color: "#8ed081", unit: "d" },
+          { key: "p90Resolution", label: "P90 resolution", color: "#ffd166", unit: "d" }
+        ])}
+      </article>
+
+      <article class="analytics-panel analytics-span-4">
+        ${renderAnalyticsPanelHeader("Open-ticket aging", "Age of active In Progress and Requires Approval tickets")}
+        ${renderAnalyticsBreakdown(ageRows, summary.openCount, ageColorMap)}
+      </article>
+
+      <article class="analytics-panel analytics-span-4">
+        ${renderAnalyticsPanelHeader("Priority performance", "High-priority demand, backlog, and completion")}
+        ${renderPriorityPanel(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-4">
+        ${renderAnalyticsPanelHeader("Data quality", "Missing values that weaken performance reporting")}
+        ${renderQualityPanel(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-6">
+        ${renderAnalyticsPanelHeader("Demand by creator", "Who submitted tickets and how their cohort progressed")}
+        ${renderCreatorTable(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-6">
+        ${renderAnalyticsPanelHeader("Closure performance", "Who closed tickets and how quickly successful work was completed")}
+        ${renderCloserTable(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-12">
+        ${renderAnalyticsPanelHeader("Operational highlights", "Extremes and pressure points in the selected period")}
+        ${renderHighlights(model)}
+      </article>
+
+      <article class="analytics-panel analytics-span-12">
+        ${renderAnalyticsPanelHeader("How to read these metrics", "Definitions based only on fields stored in tickets.json")}
+        <div class="analytics-methodology">
+          Resolution time is calendar days from Date Submitted to Date Completed for Completed tickets. Completion rate is cohort-based: tickets submitted in the selected period that are currently Completed. Canceled, Abandoned, and Rejected tickets are terminal outcomes but are not completions. Backlog is reconstructed from submitted and completed dates; reopened history and time spent in each status are not available in the current schema. Archived tickets remain part of historical performance.
+        </div>
+      </article>
+    </section>
+  `;
+}
+
+function openAnalytics() {
+  state.analyticsOpen = true;
+  syncAnalyticsPersonFilters();
+  renderAnalytics();
+  el.analyticsView.classList.remove("hidden");
+  document.body.classList.add("analytics-open");
+  el.analyticsView.scrollTop = 0;
+  window.requestAnimationFrame(() => el.closeAnalyticsBtn.focus());
+}
+
+function closeAnalytics() {
+  state.analyticsOpen = false;
+  el.analyticsView.classList.add("hidden");
+  document.body.classList.remove("analytics-open");
+  el.analyticsBtn.focus();
+}
+
+function resetAnalyticsFilters() {
+  el.analyticsRange.value = "90";
+  el.analyticsGrouping.value = "auto";
+  el.analyticsStatus.value = "all";
+  el.analyticsPriority.value = "all";
+  el.analyticsCreator.value = "all";
+  el.analyticsCloser.value = "all";
+  renderAnalytics();
 }
 
 let detailsTrackSyncFrame = null;
@@ -996,6 +1642,8 @@ function render() {
   el.countWaiting.textContent = String(counts.waiting);
   el.countCompleted.textContent = String(counts.completed);
   el.countCanceled.textContent = String(counts.canceled);
+  el.countAbandoned.textContent = String(counts.abandoned);
+  el.countRejected.textContent = String(counts.rejected);
   el.countArchived.textContent = String(archivedCount);
 
   if (state.repositoryError) {
@@ -1028,6 +1676,11 @@ function render() {
   renderDetails(selectedTicket);
   el.bannerText.innerHTML = buildBannerHtml(tickets);
   setMutationControlsDisabled(!state.repositoryReady || state.isSaving);
+  el.analyticsBtn.disabled = !state.repositoryReady;
+  if (state.analyticsOpen) {
+    syncAnalyticsPersonFilters();
+    renderAnalytics();
+  }
   scheduleDetailsTrackSync(selectedTicket?.id ?? "");
 }
 
@@ -1441,6 +2094,19 @@ el.csvImportInput.addEventListener("change", async (event) => {
   }
 });
 el.exportCsvBtn.addEventListener("click", exportTicketsCsv);
+el.analyticsBtn.addEventListener("click", openAnalytics);
+el.closeAnalyticsBtn.addEventListener("click", closeAnalytics);
+el.resetAnalyticsBtn.addEventListener("click", resetAnalyticsFilters);
+[
+  el.analyticsRange,
+  el.analyticsGrouping,
+  el.analyticsStatus,
+  el.analyticsPriority,
+  el.analyticsCreator,
+  el.analyticsCloser
+].forEach((control) => {
+  control.addEventListener("change", renderAnalytics);
+});
 el.clearFormBtn.addEventListener("click", clearCreateForm);
 el.ticketSearch.addEventListener("input", () => {
   state.searchQuery = normalizeSearchQuery(el.ticketSearch.value);
@@ -1529,6 +2195,12 @@ el.noteText.addEventListener("keydown", (event) => {
 
 window.addEventListener("resize", () => {
   scheduleDetailsTrackSync();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && state.analyticsOpen) {
+    closeAnalytics();
+  }
 });
 
 async function init() {

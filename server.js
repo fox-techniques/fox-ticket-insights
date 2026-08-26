@@ -12,7 +12,7 @@ const DATA_FILE = path.join(DATA_DIR, "tickets.json");
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = Number(process.env.PORT || 4173);
 const MAX_BODY_BYTES = 5 * 1024 * 1024;
-const VALID_STATUSES = new Set(["inprogress", "waiting", "completed", "canceled"]);
+const VALID_STATUSES = new Set(["inprogress", "waiting", "completed", "canceled", "abandoned", "rejected"]);
 
 const MIME_TYPES = {
   ".css": "text/css; charset=utf-8",

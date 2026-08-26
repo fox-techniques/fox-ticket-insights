@@ -1,20 +1,3362 @@
 [
   {
     "id": "ticket-1787769111637-j5cxyv",
-    "ticketCode": "123123",
+    "ticketCode": "21789",
     "highPriority": true,
-    "title": "Thic one",
-    "createdBy": "",
+    "title": "Add export option",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-05-02",
+    "completedDate": "2026-05-10",
+    "status": "canceled",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1777711219000,
+    "updatedAt": 1778427900000,
+    "notes": [
+      {
+        "id": "note-1-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1777736419000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769112637-t00001",
+    "ticketCode": "21790",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Emma de Vries",
     "closedBy": "",
-    "submittedDate": "2026-08-26",
+    "submittedDate": "2026-02-06",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce processing time",
+    "archived": true,
+    "createdAt": 1770387293000,
+    "updatedAt": 1770682493000,
+    "notes": [
+      {
+        "id": "note-2-1",
+        "text": "Ready for final review.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1770423293000
+      },
+      {
+        "id": "note-2-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1770488093000
+      },
+      {
+        "id": "note-2-3",
+        "text": "Testing completed successfully.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1770592493000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769113637-t00002",
+    "ticketCode": "21791",
+    "highPriority": false,
+    "title": "Review audit log behavior",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-08-24",
+    "completedDate": "2026-08-26",
+    "status": "rejected",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1787575931000,
+    "updatedAt": 1787732580000,
+    "notes": [
+      {
+        "id": "note-3-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1787604731000
+      },
+      {
+        "id": "note-3-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1787691131000
+      },
+      {
+        "id": "note-3-3",
+        "text": "Ready for final review.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1787773931000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769114637-t00003",
+    "ticketCode": "21792",
+    "highPriority": true,
+    "title": "Update customer profile workflow",
+    "createdBy": "Liam Johnson",
+    "closedBy": "",
+    "submittedDate": "2026-04-19",
     "completedDate": "",
     "status": "inprogress",
-    "details": "Hello",
-    "changeReason": "",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1776606812000,
+    "updatedAt": 1779463140000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769115637-t00004",
+    "ticketCode": "21793",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-02-12",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Bug fix",
     "expectedBenefit": "",
     "archived": false,
-    "createdAt": 1787769111637,
-    "updatedAt": 1787769185807,
+    "createdAt": 1770903653000,
+    "updatedAt": 1770986280000,
     "notes": []
+  },
+  {
+    "id": "ticket-1787769116637-t00005",
+    "ticketCode": "21794",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-08-04",
+    "completedDate": "2026-08-11",
+    "status": "canceled",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1785852879000,
+    "updatedAt": 1786465320000,
+    "notes": [
+      {
+        "id": "note-6-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1785885279000
+      },
+      {
+        "id": "note-6-2",
+        "text": "Initial review completed.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1785946479000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769117637-t00006",
+    "ticketCode": "21795",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-07-04",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1783178511000,
+    "updatedAt": 1785314580000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769118637-t00007",
+    "ticketCode": "21796",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-06-24",
+    "completedDate": "2026-06-25",
+    "status": "canceled",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1782325032000,
+    "updatedAt": 1782381420000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769119637-t00008",
+    "ticketCode": "21797",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Alex Morgan",
+    "closedBy": "",
+    "submittedDate": "2026-02-27",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1772198229000,
+    "updatedAt": 1773505029000,
+    "notes": [
+      {
+        "id": "note-9-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1772227029000
+      },
+      {
+        "id": "note-9-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1772288229000
+      },
+      {
+        "id": "note-9-3",
+        "text": "Initial review completed.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1772389029000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769120637-t00009",
+    "ticketCode": "21798",
+    "highPriority": true,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-05-06",
+    "completedDate": "2026-05-28",
+    "status": "completed",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1778065133000,
+    "updatedAt": 1779978780000,
+    "notes": [
+      {
+        "id": "note-10-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1778075933000
+      },
+      {
+        "id": "note-10-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1778176733000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769121637-t00010",
+    "ticketCode": "21799",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Priya Shah",
+    "closedBy": "",
+    "submittedDate": "2026-08-21",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1787318045000,
+    "updatedAt": 1787657580000,
+    "notes": [
+      {
+        "id": "note-11-1",
+        "text": "Follow-up required.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1787354045000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769122637-t00011",
+    "ticketCode": "21800",
+    "highPriority": false,
+    "title": "Update billing configuration",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-01-29",
+    "completedDate": "2026-02-19",
+    "status": "completed",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1769709716000,
+    "updatedAt": 1771527360000,
+    "notes": [
+      {
+        "id": "note-12-1",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1769720516000
+      },
+      {
+        "id": "note-12-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1769806916000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769123637-t00012",
+    "ticketCode": "21801",
+    "highPriority": true,
+    "title": "Fix mobile layout",
+    "createdBy": "Emma de Vries",
+    "closedBy": "",
+    "submittedDate": "2026-02-21",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1771664560000,
+    "updatedAt": 1772100160000,
+    "notes": [
+      {
+        "id": "note-13-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1771668160000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769124637-t00013",
+    "ticketCode": "21802",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-05-11",
+    "completedDate": "2026-06-11",
+    "status": "abandoned",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1778504627000,
+    "updatedAt": 1781171100000,
+    "notes": [
+      {
+        "id": "note-14-1",
+        "text": "Ready for final review.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1778515427000
+      },
+      {
+        "id": "note-14-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1778627027000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769125637-t00014",
+    "ticketCode": "21803",
+    "highPriority": true,
+    "title": "Update onboarding content",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-02-28",
+    "completedDate": "2026-03-11",
+    "status": "completed",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1772296092000,
+    "updatedAt": 1773227700000,
+    "notes": [
+      {
+        "id": "note-15-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1772321292000
+      },
+      {
+        "id": "note-15-2",
+        "text": "Initial review completed.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1772400492000
+      },
+      {
+        "id": "note-15-3",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1772494092000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769126637-t00015",
+    "ticketCode": "21804",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Liam Johnson",
+    "closedBy": "",
+    "submittedDate": "2026-06-07",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1780835480000,
+    "updatedAt": 1781040680000,
+    "notes": [
+      {
+        "id": "note-16-1",
+        "text": "Ready for final review.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1780860680000
+      },
+      {
+        "id": "note-16-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1780950680000
+      },
+      {
+        "id": "note-16-3",
+        "text": "Confirmed with requester.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1781044280000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769127637-t00016",
+    "ticketCode": "21805",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-05-11",
+    "completedDate": "2026-06-14",
+    "status": "canceled",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1778506135000,
+    "updatedAt": 1781462040000,
+    "notes": [
+      {
+        "id": "note-17-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1778531335000
+      },
+      {
+        "id": "note-17-2",
+        "text": "Ready for final review.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1778617735000
+      },
+      {
+        "id": "note-17-3",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1778707735000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769128637-t00017",
+    "ticketCode": "21806",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-07-06",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1783323573000,
+    "updatedAt": 1784738373000,
+    "notes": [
+      {
+        "id": "note-18-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1783348773000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769129637-t00018",
+    "ticketCode": "21807",
+    "highPriority": true,
+    "title": "Correct report totals",
+    "createdBy": "Alex Morgan",
+    "closedBy": "",
+    "submittedDate": "2026-05-29",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1780071452000,
+    "updatedAt": 1781713052000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769130637-t00019",
+    "ticketCode": "21808",
+    "highPriority": false,
+    "title": "Improve search results",
+    "createdBy": "Jamie Chen",
+    "closedBy": "",
+    "submittedDate": "2026-03-29",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1774785385000,
+    "updatedAt": 1775933785000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769131637-t00020",
+    "ticketCode": "21809",
+    "highPriority": true,
+    "title": "Update billing configuration",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-08-03",
+    "completedDate": "2026-08-06",
+    "status": "canceled",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1785758177000,
+    "updatedAt": 1786013100000,
+    "notes": [
+      {
+        "id": "note-21-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1785772577000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769132637-t00021",
+    "ticketCode": "21810",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-06-07",
+    "completedDate": "2026-06-26",
+    "status": "rejected",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1780826538000,
+    "updatedAt": 1782475920000,
+    "notes": [
+      {
+        "id": "note-22-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1780862538000
+      },
+      {
+        "id": "note-22-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1780945338000
+      },
+      {
+        "id": "note-22-3",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1781024538000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769133637-t00022",
+    "ticketCode": "21811",
+    "highPriority": false,
+    "title": "Fix mobile layout",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-03-10",
+    "completedDate": "2026-03-10",
+    "status": "completed",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1773131420000,
+    "updatedAt": 1773155880000,
+    "notes": [
+      {
+        "id": "note-23-1",
+        "text": "Ready for final review.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1773163820000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769134637-t00023",
+    "ticketCode": "21812",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-07-12",
+    "completedDate": "2026-07-20",
+    "status": "abandoned",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1783852380000,
+    "updatedAt": 1784541420000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769135637-t00024",
+    "ticketCode": "21813",
+    "highPriority": true,
+    "title": "Add validation to form",
+    "createdBy": "Priya Shah",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-08-24",
+    "completedDate": "2026-08-26",
+    "status": "completed",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1787564792000,
+    "updatedAt": 1787757780000,
+    "notes": [
+      {
+        "id": "note-25-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1787579192000
+      },
+      {
+        "id": "note-25-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1787679992000
+      },
+      {
+        "id": "note-25-3",
+        "text": "Ready for final review.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1787751992000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769136637-t00025",
+    "ticketCode": "21814",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-06-25",
+    "completedDate": "2026-06-26",
+    "status": "abandoned",
+    "details": "Change requested after internal testing.",
+    "changeReason": "",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1782390707000,
+    "updatedAt": 1782469920000,
+    "notes": [
+      {
+        "id": "note-26-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1782401507000
+      },
+      {
+        "id": "note-26-2",
+        "text": "Initial review completed.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1782505907000
+      },
+      {
+        "id": "note-26-3",
+        "text": "Initial review completed.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1782570707000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769137637-t00026",
+    "ticketCode": "21815",
+    "highPriority": true,
+    "title": "Investigate API timeout",
+    "createdBy": "Noah Williams",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-30",
+    "completedDate": "2026-07-11",
+    "status": "abandoned",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1782804594000,
+    "updatedAt": 1783770180000,
+    "notes": [
+      {
+        "id": "note-27-1",
+        "text": "Follow-up required.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1782808194000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769138637-t00027",
+    "ticketCode": "21816",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Alex Morgan",
+    "closedBy": "",
+    "submittedDate": "2026-07-31",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1785511656000,
+    "updatedAt": 1787744640000,
+    "notes": [
+      {
+        "id": "note-28-1",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1785518856000
+      },
+      {
+        "id": "note-28-2",
+        "text": "Initial review completed.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1785608856000
+      },
+      {
+        "id": "note-28-3",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1785713256000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769139637-t00028",
+    "ticketCode": "21817",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Priya Shah",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-08-15",
+    "completedDate": "2026-08-15",
+    "status": "rejected",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1786806834000,
+    "updatedAt": 1786806834000,
+    "notes": [
+      {
+        "id": "note-29-1",
+        "text": "Follow-up required.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1786824834000
+      },
+      {
+        "id": "note-29-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1786914834000
+      },
+      {
+        "id": "note-29-3",
+        "text": "Initial review completed.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1786990434000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769140637-t00029",
+    "ticketCode": "21818",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Jamie Chen",
+    "closedBy": "",
+    "submittedDate": "2026-06-20",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1781965610000,
+    "updatedAt": 1782073610000,
+    "notes": [
+      {
+        "id": "note-30-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1781972810000
+      },
+      {
+        "id": "note-30-2",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1782088010000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769141637-t00030",
+    "ticketCode": "21819",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-01-04",
+    "completedDate": "2026-01-15",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1767543345000,
+    "updatedAt": 1768490100000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769142637-t00031",
+    "ticketCode": "21820",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-04-19",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1776582216000,
+    "updatedAt": 1779216780000,
+    "notes": [
+      {
+        "id": "note-32-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1776596616000
+      },
+      {
+        "id": "note-32-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1776679416000
+      },
+      {
+        "id": "note-32-3",
+        "text": "Waiting for additional information.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1776783816000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769143637-t00032",
+    "ticketCode": "21821",
+    "highPriority": true,
+    "title": "Correct report totals",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-05-13",
+    "completedDate": "2026-06-10",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1778691865000,
+    "updatedAt": 1781098260000,
+    "notes": [
+      {
+        "id": "note-33-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1778695465000
+      },
+      {
+        "id": "note-33-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1778785465000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769144637-t00033",
+    "ticketCode": "21822",
+    "highPriority": true,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-02-14",
+    "completedDate": "2026-02-27",
+    "status": "completed",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1771091763000,
+    "updatedAt": 1772208300000,
+    "notes": [
+      {
+        "id": "note-34-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1771109763000
+      },
+      {
+        "id": "note-34-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1771210563000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769145637-t00034",
+    "ticketCode": "21823",
+    "highPriority": false,
+    "title": "Update onboarding content",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-02-01",
+    "completedDate": "2026-02-26",
+    "status": "canceled",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce processing time",
+    "archived": true,
+    "createdAt": 1769936687000,
+    "updatedAt": 1772128920000,
+    "notes": [
+      {
+        "id": "note-35-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1769954687000
+      },
+      {
+        "id": "note-35-2",
+        "text": "Follow-up required.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1770055487000
+      },
+      {
+        "id": "note-35-3",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1770123887000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769146637-t00035",
+    "ticketCode": "21824",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Priya Shah",
+    "closedBy": "",
+    "submittedDate": "2026-05-14",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Change requested after internal testing.",
+    "changeReason": "",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1778783696000,
+    "updatedAt": 1778985296000,
+    "notes": [
+      {
+        "id": "note-36-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1778812496000
+      },
+      {
+        "id": "note-36-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1778873696000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769147637-t00036",
+    "ticketCode": "21825",
+    "highPriority": true,
+    "title": "Update billing configuration",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-08-19",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1787135421000,
+    "updatedAt": 1787751540000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769148637-t00037",
+    "ticketCode": "21826",
+    "highPriority": true,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-02-07",
+    "completedDate": "2026-02-13",
+    "status": "rejected",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1770453647000,
+    "updatedAt": 1770970320000,
+    "notes": [
+      {
+        "id": "note-38-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1770475247000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769149637-t00038",
+    "ticketCode": "21827",
+    "highPriority": true,
+    "title": "Review audit log behavior",
+    "createdBy": "Noah Williams",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-07-21",
+    "completedDate": "2026-08-06",
+    "status": "abandoned",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1784655679000,
+    "updatedAt": 1786003740000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769150637-t00039",
+    "ticketCode": "21828",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Liam Johnson",
+    "closedBy": "",
+    "submittedDate": "2026-02-05",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1770295295000,
+    "updatedAt": 1772797500000,
+    "notes": [
+      {
+        "id": "note-40-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1770324095000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769151637-t00040",
+    "ticketCode": "21829",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-02-12",
+    "completedDate": "2026-02-19",
+    "status": "rejected",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1770883840000,
+    "updatedAt": 1771513620000,
+    "notes": [
+      {
+        "id": "note-41-1",
+        "text": "Follow-up required.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1770898240000
+      },
+      {
+        "id": "note-41-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1770991840000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769152637-t00041",
+    "ticketCode": "21830",
+    "highPriority": true,
+    "title": "Resolve duplicate records",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-05-30",
+    "completedDate": "2026-06-19",
+    "status": "rejected",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1780160188000,
+    "updatedAt": 1781890260000,
+    "notes": [
+      {
+        "id": "note-42-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1780188988000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769153637-t00042",
+    "ticketCode": "21831",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-01-22",
+    "completedDate": "2026-02-03",
+    "status": "completed",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1769107093000,
+    "updatedAt": 1770110220000,
+    "notes": [
+      {
+        "id": "note-43-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1769110693000
+      },
+      {
+        "id": "note-43-2",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1769229493000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769154637-t00043",
+    "ticketCode": "21832",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-01-01",
+    "completedDate": "2026-02-04",
+    "status": "rejected",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1767252810000,
+    "updatedAt": 1770207300000,
+    "notes": [
+      {
+        "id": "note-44-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1767285210000
+      },
+      {
+        "id": "note-44-2",
+        "text": "Initial review completed.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1767371610000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769155637-t00044",
+    "ticketCode": "21833",
+    "highPriority": false,
+    "title": "Improve search results",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-03-11",
+    "completedDate": "2026-03-22",
+    "status": "rejected",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1773255203000,
+    "updatedAt": 1774176540000,
+    "notes": [
+      {
+        "id": "note-45-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1773287603000
+      },
+      {
+        "id": "note-45-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1773352403000
+      },
+      {
+        "id": "note-45-3",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1773442403000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769156637-t00045",
+    "ticketCode": "21834",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-04-23",
+    "completedDate": "2026-05-20",
+    "status": "abandoned",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1776947719000,
+    "updatedAt": 1779271380000,
+    "notes": [
+      {
+        "id": "note-46-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1776962119000
+      },
+      {
+        "id": "note-46-2",
+        "text": "Follow-up required.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1777055719000
+      },
+      {
+        "id": "note-46-3",
+        "text": "Waiting for additional information.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1777145719000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769157637-t00046",
+    "ticketCode": "21835",
+    "highPriority": true,
+    "title": "Correct report totals",
+    "createdBy": "Jamie Chen",
+    "closedBy": "",
+    "submittedDate": "2026-03-15",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1773583888000,
+    "updatedAt": 1775067088000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769158637-t00047",
+    "ticketCode": "21836",
+    "highPriority": true,
+    "title": "Investigate API timeout",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-02-12",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1770895957000,
+    "updatedAt": 1772033557000,
+    "notes": [
+      {
+        "id": "note-48-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1770921157000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769159637-t00048",
+    "ticketCode": "21837",
+    "highPriority": false,
+    "title": "Update billing configuration",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-07-20",
+    "completedDate": "2026-07-27",
+    "status": "abandoned",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1784531220000,
+    "updatedAt": 1785161400000,
+    "notes": [
+      {
+        "id": "note-49-1",
+        "text": "Follow-up required.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1784567220000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769160637-t00049",
+    "ticketCode": "21838",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-01-21",
+    "completedDate": "2026-01-27",
+    "status": "abandoned",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Lower support volume",
+    "archived": true,
+    "createdAt": 1768989426000,
+    "updatedAt": 1769538240000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769161637-t00050",
+    "ticketCode": "21839",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Noah Williams",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-04-28",
+    "completedDate": "2026-05-11",
+    "status": "completed",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1777362886000,
+    "updatedAt": 1778515080000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769162637-t00051",
+    "ticketCode": "21840",
+    "highPriority": false,
+    "title": "Update billing configuration",
+    "createdBy": "Noah Williams",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-01-25",
+    "completedDate": "2026-01-29",
+    "status": "rejected",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1769336040000,
+    "updatedAt": 1769680140000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769163637-t00052",
+    "ticketCode": "21841",
+    "highPriority": true,
+    "title": "Add validation to form",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-01-21",
+    "completedDate": "2026-02-16",
+    "status": "abandoned",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1769019617000,
+    "updatedAt": 1771248420000,
+    "notes": [
+      {
+        "id": "note-53-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1769048417000
+      },
+      {
+        "id": "note-53-2",
+        "text": "Follow-up required.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1769120417000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769164637-t00053",
+    "ticketCode": "21842",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Daniel Kim",
+    "closedBy": "",
+    "submittedDate": "2026-07-05",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1783248202000,
+    "updatedAt": 1785346980000,
+    "notes": [
+      {
+        "id": "note-54-1",
+        "text": "Follow-up required.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1783269802000
+      },
+      {
+        "id": "note-54-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1783370602000
+      },
+      {
+        "id": "note-54-3",
+        "text": "Ready for final review.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1783435402000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769165637-t00054",
+    "ticketCode": "21843",
+    "highPriority": false,
+    "title": "Fix mobile layout",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-04-12",
+    "completedDate": "2026-04-26",
+    "status": "rejected",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1775984902000,
+    "updatedAt": 1777203180000,
+    "notes": [
+      {
+        "id": "note-55-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1776017302000
+      },
+      {
+        "id": "note-55-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1776103702000
+      },
+      {
+        "id": "note-55-3",
+        "text": "Assigned to engineering.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1776190102000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769166637-t00055",
+    "ticketCode": "21844",
+    "highPriority": false,
+    "title": "Improve search results",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-04-12",
+    "completedDate": "2026-05-05",
+    "status": "abandoned",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1775980948000,
+    "updatedAt": 1777976400000,
+    "notes": [
+      {
+        "id": "note-56-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1776016948000
+      },
+      {
+        "id": "note-56-2",
+        "text": "Follow-up required.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1776103348000
+      },
+      {
+        "id": "note-56-3",
+        "text": "Initial review completed.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1776168148000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769167637-t00056",
+    "ticketCode": "21845",
+    "highPriority": true,
+    "title": "Review audit log behavior",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-06-01",
+    "completedDate": "2026-06-08",
+    "status": "completed",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1780309277000,
+    "updatedAt": 1780929480000,
+    "notes": [
+      {
+        "id": "note-57-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1780338077000
+      },
+      {
+        "id": "note-57-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1780413677000
+      },
+      {
+        "id": "note-57-3",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1780496477000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769168637-t00057",
+    "ticketCode": "21846",
+    "highPriority": true,
+    "title": "Resolve duplicate records",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-03-05",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1772707004000,
+    "updatedAt": 1773414120000,
+    "notes": [
+      {
+        "id": "note-58-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1772743004000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769169637-t00058",
+    "ticketCode": "21847",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-05-03",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Business team requested an enhancement.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1777802042000,
+    "updatedAt": 1780564140000,
+    "notes": [
+      {
+        "id": "note-59-1",
+        "text": "Follow-up required.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1777805642000
+      },
+      {
+        "id": "note-59-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1777924442000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769170637-t00059",
+    "ticketCode": "21848",
+    "highPriority": false,
+    "title": "Update onboarding content",
+    "createdBy": "Alex Morgan",
+    "closedBy": "",
+    "submittedDate": "2026-02-20",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1771603263000,
+    "updatedAt": 1772467320000,
+    "notes": [
+      {
+        "id": "note-60-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1771628463000
+      },
+      {
+        "id": "note-60-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1771704063000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769171637-t00060",
+    "ticketCode": "21849",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Priya Shah",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-05-24",
+    "completedDate": "2026-06-20",
+    "status": "abandoned",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1779631651000,
+    "updatedAt": 1781945760000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769172637-t00061",
+    "ticketCode": "21850",
+    "highPriority": true,
+    "title": "Investigate API timeout",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-03-22",
+    "completedDate": "2026-04-24",
+    "status": "abandoned",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "",
+    "archived": true,
+    "createdAt": 1774205978000,
+    "updatedAt": 1777022820000,
+    "notes": [
+      {
+        "id": "note-62-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1774231178000
+      },
+      {
+        "id": "note-62-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1774313978000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769173637-t00062",
+    "ticketCode": "21851",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Priya Shah",
+    "closedBy": "",
+    "submittedDate": "2026-06-12",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1781257137000,
+    "updatedAt": 1782390000000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769174637-t00063",
+    "ticketCode": "21852",
+    "highPriority": false,
+    "title": "Improve notification settings",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-02-04",
+    "completedDate": "2026-02-06",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1770229718000,
+    "updatedAt": 1770397620000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769175637-t00064",
+    "ticketCode": "21853",
+    "highPriority": true,
+    "title": "Review access permissions",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-05-03",
+    "completedDate": "2026-05-07",
+    "status": "completed",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1777807671000,
+    "updatedAt": 1778154780000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769176637-t00065",
+    "ticketCode": "21854",
+    "highPriority": false,
+    "title": "Add validation to form",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-08-12",
+    "completedDate": "2026-08-17",
+    "status": "rejected",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1786538603000,
+    "updatedAt": 1786956960000,
+    "notes": [
+      {
+        "id": "note-66-1",
+        "text": "Ready for final review.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1786549403000
+      },
+      {
+        "id": "note-66-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1786657403000
+      },
+      {
+        "id": "note-66-3",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1786743803000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769177637-t00066",
+    "ticketCode": "21855",
+    "highPriority": false,
+    "title": "Review access permissions",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-07-26",
+    "completedDate": "2026-07-29",
+    "status": "rejected",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1785089062000,
+    "updatedAt": 1785318300000,
+    "notes": [
+      {
+        "id": "note-67-1",
+        "text": "Ready for final review.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1785110662000
+      },
+      {
+        "id": "note-67-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1785200662000
+      },
+      {
+        "id": "note-67-3",
+        "text": "Follow-up required.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1785276262000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769178637-t00067",
+    "ticketCode": "21856",
+    "highPriority": false,
+    "title": "Improve notification settings",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-04-14",
+    "completedDate": "2026-05-15",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1776168525000,
+    "updatedAt": 1778849880000,
+    "notes": [
+      {
+        "id": "note-68-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1776182925000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769179637-t00068",
+    "ticketCode": "21857",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-05-15",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": true,
+    "createdAt": 1778837652000,
+    "updatedAt": 1779208452000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769180637-t00069",
+    "ticketCode": "21858",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Liam Johnson",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-03-08",
+    "completedDate": "2026-03-11",
+    "status": "completed",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1772983533000,
+    "updatedAt": 1773225240000,
+    "notes": [
+      {
+        "id": "note-70-1",
+        "text": "Ready for final review.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1773008733000
+      },
+      {
+        "id": "note-70-2",
+        "text": "Ready for final review.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1773105933000
+      },
+      {
+        "id": "note-70-3",
+        "text": "Waiting for additional information.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1773167133000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769181637-t00070",
+    "ticketCode": "21859",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Liam Johnson",
+    "closedBy": "",
+    "submittedDate": "2026-01-14",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1768416891000,
+    "updatedAt": 1769349900000,
+    "notes": [
+      {
+        "id": "note-71-1",
+        "text": "Ready for final review.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1768449291000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769182637-t00071",
+    "ticketCode": "21860",
+    "highPriority": true,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Jamie Chen",
+    "closedBy": "",
+    "submittedDate": "2026-06-27",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1782562074000,
+    "updatedAt": 1784228874000,
+    "notes": [
+      {
+        "id": "note-72-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1782598074000
+      },
+      {
+        "id": "note-72-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1782652074000
+      },
+      {
+        "id": "note-72-3",
+        "text": "Initial review completed.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1782763674000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769183637-t00072",
+    "ticketCode": "21861",
+    "highPriority": false,
+    "title": "Resolve duplicate records",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-08-21",
+    "completedDate": "2026-08-26",
+    "status": "canceled",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1787306542000,
+    "updatedAt": 1787767680000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769184637-t00073",
+    "ticketCode": "21862",
+    "highPriority": false,
+    "title": "Review audit log behavior",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-01-21",
+    "completedDate": "2026-01-24",
+    "status": "rejected",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1769014994000,
+    "updatedAt": 1769251860000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769185637-t00074",
+    "ticketCode": "21863",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-07-21",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Change requested after internal testing.",
+    "changeReason": "",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1784650244000,
+    "updatedAt": 1785694244000,
+    "notes": [
+      {
+        "id": "note-75-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1784657444000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769186637-t00075",
+    "ticketCode": "21864",
+    "highPriority": true,
+    "title": "Review access permissions",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-07-13",
+    "completedDate": "2026-07-17",
+    "status": "rejected",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1783950328000,
+    "updatedAt": 1784308560000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769187637-t00076",
+    "ticketCode": "21865",
+    "highPriority": true,
+    "title": "Update customer profile workflow",
+    "createdBy": "Alex Morgan",
+    "closedBy": "",
+    "submittedDate": "2026-04-09",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": true,
+    "createdAt": 1775754308000,
+    "updatedAt": 1778424300000,
+    "notes": [
+      {
+        "id": "note-77-1",
+        "text": "Ready for final review.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1775768708000
+      },
+      {
+        "id": "note-77-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1775844308000
+      },
+      {
+        "id": "note-77-3",
+        "text": "Testing completed successfully.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1775963108000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769188637-t00077",
+    "ticketCode": "21866",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Noah Williams",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-07-27",
+    "completedDate": "2026-08-26",
+    "status": "completed",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Improve user experience",
+    "archived": true,
+    "createdAt": 1785170809000,
+    "updatedAt": 1787761800000,
+    "notes": [
+      {
+        "id": "note-78-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1785206809000
+      },
+      {
+        "id": "note-78-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1785268009000
+      },
+      {
+        "id": "note-78-3",
+        "text": "Confirmed with requester.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1785361609000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769189637-t00078",
+    "ticketCode": "21867",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Priya Shah",
+    "closedBy": "",
+    "submittedDate": "2026-07-10",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1783672480000,
+    "updatedAt": 1784622880000,
+    "notes": [
+      {
+        "id": "note-79-1",
+        "text": "Initial review completed.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1783708480000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769190637-t00079",
+    "ticketCode": "21868",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-04",
+    "completedDate": "2026-06-29",
+    "status": "completed",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1780590498000,
+    "updatedAt": 1782722400000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769191637-t00080",
+    "ticketCode": "21869",
+    "highPriority": false,
+    "title": "Improve notification settings",
+    "createdBy": "Priya Shah",
+    "closedBy": "",
+    "submittedDate": "2026-01-29",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1769677965000,
+    "updatedAt": 1770293565000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769192637-t00081",
+    "ticketCode": "21870",
+    "highPriority": true,
+    "title": "Update billing configuration",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-04-21",
+    "completedDate": "2026-05-01",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1776790040000,
+    "updatedAt": 1777633560000,
+    "notes": [
+      {
+        "id": "note-82-1",
+        "text": "Initial review completed.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1776822440000
+      },
+      {
+        "id": "note-82-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1776894440000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769193637-t00082",
+    "ticketCode": "21871",
+    "highPriority": true,
+    "title": "Improve search results",
+    "createdBy": "Emma de Vries",
+    "closedBy": "",
+    "submittedDate": "2026-07-20",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "UI behavior differs from the expected result.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1784565705000,
+    "updatedAt": 1785102105000,
+    "notes": [
+      {
+        "id": "note-83-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1784598105000
+      },
+      {
+        "id": "note-83-2",
+        "text": "Follow-up required.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1784673705000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769194637-t00083",
+    "ticketCode": "21872",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Noah Williams",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-01-27",
+    "completedDate": "2026-02-28",
+    "status": "canceled",
+    "details": "Additional validation is required before submission.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1769535138000,
+    "updatedAt": 1772268660000,
+    "notes": [
+      {
+        "id": "note-84-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1769563938000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769195637-t00084",
+    "ticketCode": "21873",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-03-23",
+    "completedDate": "2026-03-29",
+    "status": "abandoned",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1774283631000,
+    "updatedAt": 1774788720000,
+    "notes": [
+      {
+        "id": "note-85-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1774308831000
+      },
+      {
+        "id": "note-85-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1774391631000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769196637-t00085",
+    "ticketCode": "21874",
+    "highPriority": true,
+    "title": "Improve notification settings",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-02-18",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1771405797000,
+    "updatedAt": 1774021620000,
+    "notes": [
+      {
+        "id": "note-86-1",
+        "text": "Initial review completed.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1771420197000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769197637-t00086",
+    "ticketCode": "21875",
+    "highPriority": true,
+    "title": "Improve search results",
+    "createdBy": "Emma de Vries",
+    "closedBy": "",
+    "submittedDate": "2026-05-06",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1778068889000,
+    "updatedAt": 1778076089000,
+    "notes": [
+      {
+        "id": "note-87-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1778076089000
+      },
+      {
+        "id": "note-87-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1778176889000
+      },
+      {
+        "id": "note-87-3",
+        "text": "Assigned to engineering.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1778277689000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769198637-t00087",
+    "ticketCode": "21876",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Noah Williams",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-05-08",
+    "completedDate": "2026-05-21",
+    "status": "canceled",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1778244846000,
+    "updatedAt": 1779380460000,
+    "notes": [
+      {
+        "id": "note-88-1",
+        "text": "Follow-up required.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1778266446000
+      },
+      {
+        "id": "note-88-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1778356446000
+      },
+      {
+        "id": "note-88-3",
+        "text": "Ready for final review.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1778446446000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769199637-t00088",
+    "ticketCode": "21877",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Noah Williams",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-02-06",
+    "completedDate": "2026-02-06",
+    "status": "abandoned",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1770390189000,
+    "updatedAt": 1770396600000,
+    "notes": [
+      {
+        "id": "note-89-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1770393789000
+      },
+      {
+        "id": "note-89-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1770498189000
+      },
+      {
+        "id": "note-89-3",
+        "text": "Waiting for additional information.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1770591789000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769200637-t00089",
+    "ticketCode": "21878",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-05-01",
+    "completedDate": "2026-05-03",
+    "status": "abandoned",
+    "details": "Business team requested an enhancement.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1777658051000,
+    "updatedAt": 1777823460000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769201637-t00090",
+    "ticketCode": "21879",
+    "highPriority": true,
+    "title": "Review audit log behavior",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-04-05",
+    "completedDate": "2026-04-12",
+    "status": "rejected",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1775377462000,
+    "updatedAt": 1775983620000,
+    "notes": [
+      {
+        "id": "note-91-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1775391862000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769202637-t00091",
+    "ticketCode": "21880",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-05-31",
+    "completedDate": "2026-06-08",
+    "status": "canceled",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1780211677000,
+    "updatedAt": 1780943820000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769203637-t00092",
+    "ticketCode": "21881",
+    "highPriority": true,
+    "title": "Improve search results",
+    "createdBy": "Noah Williams",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-03-13",
+    "completedDate": "2026-03-19",
+    "status": "rejected",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1773426250000,
+    "updatedAt": 1773945300000,
+    "notes": [
+      {
+        "id": "note-93-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1773447850000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769204637-t00093",
+    "ticketCode": "21882",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Priya Shah",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-06-23",
+    "completedDate": "2026-07-13",
+    "status": "completed",
+    "details": "Performance is slower than expected.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1782218470000,
+    "updatedAt": 1783966620000,
+    "notes": [
+      {
+        "id": "note-94-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1782236470000
+      },
+      {
+        "id": "note-94-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1782337270000
+      },
+      {
+        "id": "note-94-3",
+        "text": "Ready for final review.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1782416470000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769205637-t00094",
+    "ticketCode": "21883",
+    "highPriority": true,
+    "title": "Review access permissions",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-07-02",
+    "completedDate": "2026-07-29",
+    "status": "canceled",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1782987843000,
+    "updatedAt": 1785320340000,
+    "notes": [
+      {
+        "id": "note-95-1",
+        "text": "Follow-up required.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1782991443000
+      },
+      {
+        "id": "note-95-2",
+        "text": "Follow-up required.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1783103043000
+      },
+      {
+        "id": "note-95-3",
+        "text": "Ready for final review.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1783167843000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769206637-t00095",
+    "ticketCode": "21884",
+    "highPriority": true,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Jamie Chen",
+    "closedBy": "",
+    "submittedDate": "2026-08-01",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1785586628000,
+    "updatedAt": 1786468628000,
+    "notes": [
+      {
+        "id": "note-96-1",
+        "text": "Initial review completed.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1785604628000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769207637-t00096",
+    "ticketCode": "21885",
+    "highPriority": false,
+    "title": "Add export option",
+    "createdBy": "Noah Williams",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-07-26",
+    "completedDate": "2026-08-13",
+    "status": "abandoned",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1785052407000,
+    "updatedAt": 1786622880000,
+    "notes": [
+      {
+        "id": "note-97-1",
+        "text": "Follow-up required.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1785081207000
+      },
+      {
+        "id": "note-97-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1785153207000
+      },
+      {
+        "id": "note-97-3",
+        "text": "Initial review completed.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1785228807000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769208637-t00097",
+    "ticketCode": "21886",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-08-25",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1787669870000,
+    "updatedAt": 1787749860000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769209637-t00098",
+    "ticketCode": "21887",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-03-31",
+    "completedDate": "2026-04-08",
+    "status": "rejected",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1774962250000,
+    "updatedAt": 1775660640000,
+    "notes": [
+      {
+        "id": "note-99-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1774983850000
+      },
+      {
+        "id": "note-99-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1775077450000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769210637-t00099",
+    "ticketCode": "21888",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-07-30",
+    "completedDate": "2026-08-20",
+    "status": "canceled",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1785436245000,
+    "updatedAt": 1787224440000,
+    "notes": [
+      {
+        "id": "note-100-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1785454245000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769211637-t00100",
+    "ticketCode": "21889",
+    "highPriority": true,
+    "title": "Improve notification settings",
+    "createdBy": "Priya Shah",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-07-27",
+    "completedDate": "2026-08-19",
+    "status": "canceled",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Lower support volume",
+    "archived": false,
+    "createdAt": 1785141099000,
+    "updatedAt": 1787153760000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769212637-t00101",
+    "ticketCode": "21890",
+    "highPriority": false,
+    "title": "Fix dashboard loading issue",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-05-14",
+    "completedDate": "2026-06-11",
+    "status": "completed",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1778765694000,
+    "updatedAt": 1781175840000,
+    "notes": [
+      {
+        "id": "note-102-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1778780094000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769213637-t00102",
+    "ticketCode": "21891",
+    "highPriority": false,
+    "title": "Review access permissions",
+    "createdBy": "Noah Williams",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-01-27",
+    "completedDate": "2026-02-25",
+    "status": "abandoned",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "",
+    "archived": false,
+    "createdAt": 1769499858000,
+    "updatedAt": 1772040300000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769214637-t00103",
+    "ticketCode": "21892",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Sofia Martinez",
+    "closedBy": "",
+    "submittedDate": "2026-05-08",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Testing a new configuration in the application.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1778242639000,
+    "updatedAt": 1780766520000,
+    "notes": [
+      {
+        "id": "note-104-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1778260639000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769215637-t00104",
+    "ticketCode": "21893",
+    "highPriority": false,
+    "title": "Correct report totals",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-02-08",
+    "completedDate": "2026-03-02",
+    "status": "abandoned",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": true,
+    "createdAt": 1770553546000,
+    "updatedAt": 1772463360000,
+    "notes": [
+      {
+        "id": "note-105-1",
+        "text": "Ready for final review.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1770589546000
+      },
+      {
+        "id": "note-105-2",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1770650746000
+      },
+      {
+        "id": "note-105-3",
+        "text": "Initial review completed.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1770758746000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769216637-t00105",
+    "ticketCode": "21894",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Daniel Kim",
+    "closedBy": "",
+    "submittedDate": "2026-01-01",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1767253104000,
+    "updatedAt": 1767444000000,
+    "notes": [
+      {
+        "id": "note-106-1",
+        "text": "Waiting for additional information.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1767267504000
+      },
+      {
+        "id": "note-106-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Noah Williams",
+        "createdAt": 1767364704000
+      },
+      {
+        "id": "note-106-3",
+        "text": "Follow-up required.",
+        "createdBy": "Emma de Vries",
+        "createdAt": 1767440304000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769217637-t00106",
+    "ticketCode": "21895",
+    "highPriority": true,
+    "title": "Add export option",
+    "createdBy": "Jamie Chen",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-07-19",
+    "completedDate": "2026-07-22",
+    "status": "completed",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1784478850000,
+    "updatedAt": 1784724840000,
+    "notes": [
+      {
+        "id": "note-107-1",
+        "text": "Ready for final review.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1784504050000
+      },
+      {
+        "id": "note-107-2",
+        "text": "Waiting for additional information.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1784601250000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769218637-t00107",
+    "ticketCode": "21896",
+    "highPriority": true,
+    "title": "Fix mobile layout",
+    "createdBy": "Priya Shah",
+    "closedBy": "Sam Patel",
+    "submittedDate": "2026-08-26",
+    "completedDate": "2026-08-26",
+    "status": "completed",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1787741296000,
+    "updatedAt": 1787741940000,
+    "notes": [
+      {
+        "id": "note-108-1",
+        "text": "Follow-up required.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1787755696000
+      },
+      {
+        "id": "note-108-2",
+        "text": "Initial review completed.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1787788799000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769219637-t00108",
+    "ticketCode": "21897",
+    "highPriority": false,
+    "title": "Update customer profile workflow",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-29",
+    "completedDate": "2026-07-05",
+    "status": "abandoned",
+    "details": "Requested change for the current workflow.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Increase data accuracy",
+    "archived": false,
+    "createdAt": 1782740907000,
+    "updatedAt": 1783272660000,
+    "notes": [
+      {
+        "id": "note-109-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1782766107000
+      },
+      {
+        "id": "note-109-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1782838107000
+      },
+      {
+        "id": "note-109-3",
+        "text": "Testing completed successfully.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1782924507000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769220637-t00109",
+    "ticketCode": "21898",
+    "highPriority": true,
+    "title": "Add export option",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-07-18",
+    "completedDate": "2026-08-12",
+    "status": "completed",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Process improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1784381920000,
+    "updatedAt": 1786546320000,
+    "notes": [
+      {
+        "id": "note-110-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1784403520000
+      },
+      {
+        "id": "note-110-2",
+        "text": "Assigned to engineering.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1784479120000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769221637-t00110",
+    "ticketCode": "21899",
+    "highPriority": false,
+    "title": "Improve notification settings",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-16",
+    "completedDate": "2026-06-28",
+    "status": "rejected",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1781594047000,
+    "updatedAt": 1782639780000,
+    "notes": [
+      {
+        "id": "note-111-1",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1781619247000
+      },
+      {
+        "id": "note-111-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1781712847000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769222637-t00111",
+    "ticketCode": "21900",
+    "highPriority": true,
+    "title": "Add export option",
+    "createdBy": "Liam Johnson",
+    "closedBy": "",
+    "submittedDate": "2026-05-06",
+    "completedDate": "",
+    "status": "waiting",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1778062415000,
+    "updatedAt": 1778247600000,
+    "notes": [
+      {
+        "id": "note-112-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1778080415000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769223637-t00112",
+    "ticketCode": "21901",
+    "highPriority": true,
+    "title": "Add validation to form",
+    "createdBy": "Emma de Vries",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-02-17",
+    "completedDate": "2026-03-06",
+    "status": "canceled",
+    "details": "User reported an issue that needs investigation.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Improve system reliability",
+    "archived": false,
+    "createdAt": 1771353005000,
+    "updatedAt": 1772810880000,
+    "notes": []
+  },
+  {
+    "id": "ticket-1787769224637-t00113",
+    "ticketCode": "21902",
+    "highPriority": false,
+    "title": "Add status filter",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Chris Wilson",
+    "submittedDate": "2026-03-22",
+    "completedDate": "2026-04-22",
+    "status": "completed",
+    "details": "Business team requested an enhancement.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1774171026000,
+    "updatedAt": 1776871200000,
+    "notes": [
+      {
+        "id": "note-114-1",
+        "text": "Testing completed successfully.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1774189026000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769225637-t00114",
+    "ticketCode": "21903",
+    "highPriority": true,
+    "title": "Add export option",
+    "createdBy": "Noah Williams",
+    "closedBy": "Jordan Lee",
+    "submittedDate": "2026-03-25",
+    "completedDate": "2026-04-13",
+    "status": "canceled",
+    "details": "Issue reproduced and assigned for review.",
+    "changeReason": "Usability improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1774447546000,
+    "updatedAt": 1776073140000,
+    "notes": [
+      {
+        "id": "note-115-1",
+        "text": "Assigned to engineering.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1774472746000
+      },
+      {
+        "id": "note-115-2",
+        "text": "Ready for final review.",
+        "createdBy": "Priya Shah",
+        "createdAt": 1774544746000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769226637-t00115",
+    "ticketCode": "21904",
+    "highPriority": false,
+    "title": "Fix mobile layout",
+    "createdBy": "Priya Shah",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-03",
+    "completedDate": "2026-06-18",
+    "status": "abandoned",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Bug fix",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1780494668000,
+    "updatedAt": 1781796660000,
+    "notes": [
+      {
+        "id": "note-116-1",
+        "text": "Initial review completed.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1780505468000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769227637-t00116",
+    "ticketCode": "21905",
+    "highPriority": true,
+    "title": "Investigate API timeout",
+    "createdBy": "Alex Morgan",
+    "closedBy": "Taylor Brown",
+    "submittedDate": "2026-06-22",
+    "completedDate": "2026-06-25",
+    "status": "rejected",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Compliance requirement",
+    "expectedBenefit": "Improve reporting quality",
+    "archived": false,
+    "createdAt": 1782141878000,
+    "updatedAt": 1782379560000,
+    "notes": [
+      {
+        "id": "note-117-1",
+        "text": "Issue reproduced in test environment.",
+        "createdBy": "Sofia Martinez",
+        "createdAt": 1782167078000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769228637-t00117",
+    "ticketCode": "21906",
+    "highPriority": true,
+    "title": "Add status filter",
+    "createdBy": "Priya Shah",
+    "closedBy": "Morgan Davis",
+    "submittedDate": "2026-06-07",
+    "completedDate": "2026-06-24",
+    "status": "rejected",
+    "details": "Data appears inconsistent in several records.",
+    "changeReason": "Customer request",
+    "expectedBenefit": "Reduce manual work",
+    "archived": false,
+    "createdAt": 1780839115000,
+    "updatedAt": 1782324000000,
+    "notes": [
+      {
+        "id": "note-118-1",
+        "text": "Confirmed with requester.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1780867915000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769229637-t00118",
+    "ticketCode": "21907",
+    "highPriority": false,
+    "title": "Investigate API timeout",
+    "createdBy": "Daniel Kim",
+    "closedBy": "Riley Smith",
+    "submittedDate": "2026-01-23",
+    "completedDate": "2026-02-20",
+    "status": "completed",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Internal testing",
+    "expectedBenefit": "Improve user experience",
+    "archived": false,
+    "createdAt": 1769175954000,
+    "updatedAt": 1771607700000,
+    "notes": [
+      {
+        "id": "note-119-1",
+        "text": "Ready for final review.",
+        "createdBy": "Liam Johnson",
+        "createdAt": 1769208354000
+      },
+      {
+        "id": "note-119-2",
+        "text": "Confirmed with requester.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1769273154000
+      }
+    ]
+  },
+  {
+    "id": "ticket-1787769230637-t00119",
+    "ticketCode": "21908",
+    "highPriority": true,
+    "title": "Resolve duplicate records",
+    "createdBy": "Noah Williams",
+    "closedBy": "",
+    "submittedDate": "2026-06-07",
+    "completedDate": "",
+    "status": "inprogress",
+    "details": "Change requested after internal testing.",
+    "changeReason": "Performance improvement",
+    "expectedBenefit": "Reduce processing time",
+    "archived": false,
+    "createdAt": 1780828868000,
+    "updatedAt": 1780829280000,
+    "notes": [
+      {
+        "id": "note-120-1",
+        "text": "Initial review completed.",
+        "createdBy": "Jamie Chen",
+        "createdAt": 1780832468000
+      },
+      {
+        "id": "note-120-2",
+        "text": "Testing completed successfully.",
+        "createdBy": "Daniel Kim",
+        "createdAt": 1780918868000
+      },
+      {
+        "id": "note-120-3",
+        "text": "Follow-up required.",
+        "createdBy": "Alex Morgan",
+        "createdAt": 1781034068000
+      }
+    ]
   }
 ]

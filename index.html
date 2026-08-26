@@ -11,7 +11,10 @@
   <div class="wrap">
     <div class="title">
       <h1>FOX Ticket Tracker</h1>
-      <div class="status" id="status">No tickets yet</div>
+      <div class="title-actions">
+        <div class="status" id="status">No tickets yet</div>
+        <button id="analyticsBtn" class="analytics-launch" type="button">View Analytics</button>
+      </div>
     </div>
 
     <div class="grid">
@@ -76,6 +79,8 @@
                 <option value="waiting">Requires Approval</option>
                 <option value="completed">Completed</option>
                 <option value="canceled">Canceled</option>
+                <option value="abandoned">Abandoned</option>
+                <option value="rejected">Rejected</option>
               </select>
             </label>
           </div>
@@ -136,6 +141,14 @@
           <div class="stat">
             <div class="label">Canceled</div>
             <div class="val" id="countCanceled">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Abandoned</div>
+            <div class="val" id="countAbandoned">0</div>
+          </div>
+          <div class="stat">
+            <div class="label">Rejected</div>
+            <div class="val" id="countRejected">0</div>
           </div>
           <div class="stat">
             <div class="label">Archived</div>
@@ -209,6 +222,8 @@
                   <option value="waiting">Requires Approval</option>
                   <option value="completed">Completed</option>
                   <option value="canceled">Canceled</option>
+                  <option value="abandoned">Abandoned</option>
+                  <option value="rejected">Rejected</option>
                 </select>
               </label>
             </div>
@@ -258,10 +273,94 @@
     </div>
   </div>
 
+  <section
+    id="analyticsView"
+    class="analytics-view hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="analyticsTitle"
+  >
+    <div class="analytics-frame">
+      <header class="analytics-header">
+        <div>
+          <div class="analytics-kicker">Service Team Performance</div>
+          <h1 id="analyticsTitle">Ticket Operations Dashboard</h1>
+          <p>Volume, throughput, resolution, backlog, ownership, and data quality from the repository dataset.</p>
+        </div>
+        <button id="closeAnalyticsBtn" class="analytics-close" type="button" aria-label="Close analytics">Close</button>
+      </header>
+
+      <div class="analytics-toolbar" aria-label="Analytics filters">
+        <label class="analytics-filter">
+          <span>Period</span>
+          <select id="analyticsRange">
+            <option value="30">Last 30 days</option>
+            <option value="90" selected>Last 90 days</option>
+            <option value="365">Last 12 months</option>
+            <option value="ytd">Year to date</option>
+            <option value="all">All time</option>
+          </select>
+        </label>
+
+        <label class="analytics-filter">
+          <span>Group by</span>
+          <select id="analyticsGrouping">
+            <option value="auto" selected>Automatic</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select>
+        </label>
+
+        <label class="analytics-filter">
+          <span>Status</span>
+          <select id="analyticsStatus">
+            <option value="all" selected>All statuses</option>
+            <option value="inprogress">In Progress</option>
+            <option value="waiting">Requires Approval</option>
+            <option value="completed">Completed</option>
+            <option value="canceled">Canceled</option>
+            <option value="abandoned">Abandoned</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </label>
+
+        <label class="analytics-filter">
+          <span>Priority</span>
+          <select id="analyticsPriority">
+            <option value="all" selected>All priorities</option>
+            <option value="high">High priority</option>
+            <option value="standard">Standard</option>
+          </select>
+        </label>
+
+        <label class="analytics-filter">
+          <span>Created by</span>
+          <select id="analyticsCreator">
+            <option value="all">All creators</option>
+          </select>
+        </label>
+
+        <label class="analytics-filter">
+          <span>Closed by</span>
+          <select id="analyticsCloser">
+            <option value="all">All closers</option>
+          </select>
+        </label>
+
+        <button id="resetAnalyticsBtn" class="analytics-reset" type="button">Reset filters</button>
+      </div>
+
+      <div class="analytics-scope" id="analyticsScope">Loading analytics...</div>
+      <main class="analytics-content" id="analyticsContent"></main>
+    </div>
+  </section>
+
   <div class="banner">
     <div id="bannerText" class="scroll-text"></div>
   </div>
 
+  <script src="analytics.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
