@@ -19,7 +19,7 @@ Static ticket tracker built in the same visual style as `fox-time-tracker`.
 - Archive / restore support
 - Search by ticket ID, title, details, and notes
 - CSV import and export with the same round-trip format
-- Full-screen service analytics for volume, throughput, backlog, resolution, priority, creators, closers, and data quality
+- Full-screen service analytics for volume, throughput, backlog, resolution, priority, and data quality
 - Repository-backed storage exclusively in [`data/tickets.json`](data/tickets.json)
 - Atomic, validated saves with stale-session protection
 

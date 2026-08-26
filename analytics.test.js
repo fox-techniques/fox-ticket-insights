@@ -126,29 +126,7 @@ test("unsuccessful terminal outcomes never inflate completion or resolution", ()
   assert.equal(model.summary.p90Resolution, null);
 });
 
-test("people tables separate demand from terminal-ticket closure performance", () => {
-  const model = analytics.buildModel(dataset, {
-    range: "30",
-    today: "2026-08-31"
-  });
-
-  assert.deepEqual(
-    model.creators.map((row) => [row.name, row.count]),
-    [["Alice", 2], ["Carol", 1], ["Grace", 1], ["Hugo", 1]]
-  );
-  assert.deepEqual(
-    model.closers.map((row) => [row.name, row.count, row.completed, row.canceled, row.abandoned, row.rejected]),
-    [
-      ["Bob", 2, 2, 0, 0, 0],
-      ["Dana", 1, 0, 1, 0, 0],
-      ["Erin", 1, 0, 0, 0, 1],
-      ["Frank", 1, 0, 0, 1, 0]
-    ]
-  );
-  assert.equal(model.closers[0].medianResolution, 26);
-});
-
-test("priority and person filters constrain the complete dashboard model", () => {
+test("priority and status filters constrain the complete dashboard model", () => {
   const priorityModel = analytics.buildModel(dataset, {
     range: "30",
     priority: "high",
@@ -158,14 +136,14 @@ test("priority and person filters constrain the complete dashboard model", () =>
   assert.equal(priorityModel.summary.createdCount, 1);
   assert.equal(priorityModel.summary.openCount, 1);
 
-  const creatorModel = analytics.buildModel(dataset, {
+  const statusModel = analytics.buildModel(dataset, {
     range: "30",
-    creator: analytics.personKey("Alice"),
+    status: "rejected",
     today: "2026-08-31"
   });
-  assert.equal(creatorModel.totalTickets, 2);
-  assert.equal(creatorModel.summary.createdCount, 2);
-  assert.equal(creatorModel.summary.completedCount, 1);
+  assert.equal(statusModel.totalTickets, 1);
+  assert.equal(statusModel.summary.createdCount, 1);
+  assert.equal(statusModel.summary.completedCount, 0);
 });
 
 test("data quality identifies missing reporting fields", () => {
@@ -182,5 +160,5 @@ test("data quality identifies missing reporting fields", () => {
     range: "30",
     today: "2026-08-31"
   });
-  assert.deepEqual(model.quality.map((item) => item.count), [1, 1, 0, 1, 1]);
+  assert.deepEqual(model.quality.map((item) => item.count), [0, 1, 1]);
 });

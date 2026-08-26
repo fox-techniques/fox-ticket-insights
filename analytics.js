@@ -44,15 +44,6 @@
     return percentile(values, 0.5);
   }
 
-  function personKey(value) {
-    const name = String(value || "").trim();
-    return name ? name.toLocaleLowerCase() : "__missing__";
-  }
-
-  function personLabel(value) {
-    return String(value || "").trim() || "Not specified";
-  }
-
   function isTerminal(ticket) {
     return TERMINAL_STATUSES.has(ticket.status);
   }
@@ -110,8 +101,6 @@
       if (options.status !== "all" && ticket.status !== options.status) return false;
       if (options.priority === "high" && !ticket.highPriority) return false;
       if (options.priority === "standard" && ticket.highPriority) return false;
-      if (options.creator !== "all" && personKey(ticket.createdBy) !== options.creator) return false;
-      if (options.closer !== "all" && personKey(ticket.closedBy) !== options.closer) return false;
       return true;
     });
   }
@@ -274,89 +263,11 @@
     }));
   }
 
-  function groupCreators(tickets) {
-    const groups = new Map();
-    tickets.forEach((ticket) => {
-      const key = personKey(ticket.createdBy);
-      const current = groups.get(key) || {
-        key,
-        name: personLabel(ticket.createdBy),
-        count: 0,
-        completed: 0,
-        highPriority: 0
-      };
-      current.count += 1;
-      current.completed += ticket.status === "completed" ? 1 : 0;
-      current.highPriority += ticket.highPriority ? 1 : 0;
-      groups.set(key, current);
-    });
-    return [...groups.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
-  }
-
-  function groupClosers(tickets) {
-    const groups = new Map();
-    tickets.forEach((ticket) => {
-      const key = personKey(ticket.closedBy);
-      const current = groups.get(key) || {
-        key,
-        name: personLabel(ticket.closedBy),
-        count: 0,
-        completed: 0,
-        canceled: 0,
-        abandoned: 0,
-        rejected: 0,
-        resolutionValues: []
-      };
-      current.count += 1;
-      current.completed += ticket.status === "completed" ? 1 : 0;
-      current.canceled += ticket.status === "canceled" ? 1 : 0;
-      current.abandoned += ticket.status === "abandoned" ? 1 : 0;
-      current.rejected += ticket.status === "rejected" ? 1 : 0;
-      const duration = ticket.status === "completed" ? resolutionDays(ticket) : null;
-      if (duration !== null) current.resolutionValues.push(duration);
-      groups.set(key, current);
-    });
-    return [...groups.values()]
-      .map((group) => ({
-        ...group,
-        medianResolution: median(group.resolutionValues),
-        p90Resolution: percentile(group.resolutionValues, 0.9)
-      }))
-      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
-  }
-
-  function collectPeople(tickets, field) {
-    const groups = new Map();
-    tickets.forEach((ticket) => {
-      const key = personKey(ticket[field]);
-      const current = groups.get(key) || {
-        key,
-        label: personLabel(ticket[field]),
-        count: 0
-      };
-      current.count += 1;
-      groups.set(key, current);
-    });
-    return [...groups.values()].sort((a, b) => {
-      if (a.key === "__missing__") return 1;
-      if (b.key === "__missing__") return -1;
-      return a.label.localeCompare(b.label);
-    });
-  }
-
   function buildQuality(tickets, summary) {
     const terminalWithoutDate = tickets.filter((ticket) => (
       isTerminal(ticket) && parseDate(ticket.completedDate) === null
     )).length;
     return [
-      {
-        label: "Created by missing",
-        count: summary.createdTickets.filter((ticket) => !String(ticket.createdBy || "").trim()).length
-      },
-      {
-        label: "Closed by missing",
-        count: summary.terminalTickets.filter((ticket) => !String(ticket.closedBy || "").trim()).length
-      },
       {
         label: "Completion date missing",
         count: terminalWithoutDate
@@ -387,7 +298,7 @@
     };
   }
 
-  function buildHighlights(summary, closerRows, trend, periodEnd) {
+  function buildHighlights(summary, trend, periodEnd) {
     const completedWithDuration = summary.completedTickets
       .map((ticket) => ({ ticket, days: resolutionDays(ticket) }))
       .filter((item) => item.days !== null)
@@ -406,7 +317,6 @@
       fastest: completedWithDuration[0] || null,
       slowest: completedWithDuration.at(-1) || null,
       oldestOpen: openByAge[0] || null,
-      busiestCloser: closerRows[0] || null,
       peak,
       netFlow
     };
@@ -418,9 +328,7 @@
       range: options.range || "90",
       grouping: options.grouping || "auto",
       status: options.status || "all",
-      priority: options.priority || "all",
-      creator: options.creator || "all",
-      closer: options.closer || "all"
+      priority: options.priority || "all"
     };
     const period = getPeriod(settings.range, safeTickets, options.today);
     const filteredTickets = filterTickets(safeTickets, settings);
@@ -430,9 +338,6 @@
       : null;
     const grouping = resolveGrouping(settings.grouping, period.inclusiveDays);
     const trend = buildTrend(filteredTickets, period, grouping);
-    const creators = groupCreators(summary.createdTickets);
-    const closers = groupClosers(summary.terminalTickets);
-
     return {
       settings,
       period: { ...period, grouping },
@@ -442,18 +347,14 @@
       trend,
       statusBreakdown: buildStatusBreakdown(summary.createdTickets),
       ageBuckets: buildAgeBuckets(summary.openAges),
-      creators,
-      closers,
       priority: buildPrioritySummary(summary),
       quality: buildQuality(filteredTickets, summary),
-      highlights: buildHighlights(summary, closers, trend, period.end)
+      highlights: buildHighlights(summary, trend, period.end)
     };
   }
 
   const api = {
     buildModel,
-    collectPeople,
-    personKey,
     percentile,
     resolutionDays,
     toIsoDate

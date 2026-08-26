@@ -164,8 +164,6 @@ const el = {
   analyticsGrouping: $("analyticsGrouping"),
   analyticsStatus: $("analyticsStatus"),
   analyticsPriority: $("analyticsPriority"),
-  analyticsCreator: $("analyticsCreator"),
-  analyticsCloser: $("analyticsCloser"),
   analyticsScope: $("analyticsScope"),
   analyticsContent: $("analyticsContent")
 };
@@ -1181,55 +1179,6 @@ function renderStatusPanel(model) {
   `;
 }
 
-function renderCreatorTable(model) {
-  if (!model.creators.length) return '<div class="analytics-empty">No creators in this period.</div>';
-  return `
-    <div class="analytics-table-wrap">
-      <table class="analytics-table">
-        <thead><tr><th>Created by</th><th>Tickets</th><th>Share</th><th>Completed</th><th>Cohort rate</th><th>High prio</th></tr></thead>
-        <tbody>
-          ${model.creators.map((row) => `
-            <tr>
-              <td class="analytics-person ${row.key === "__missing__" ? "is-missing" : ""}">${escapeHtml(row.name)}</td>
-              <td>${row.count}</td>
-              <td>${formatAnalyticsPercent((row.count / model.summary.createdCount) * 100)}</td>
-              <td>${row.completed}</td>
-              <td>${formatAnalyticsPercent((row.completed / row.count) * 100)}</td>
-              <td>${row.highPriority}</td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function renderCloserTable(model) {
-  if (!model.closers.length) return '<div class="analytics-empty">No closed tickets in this period.</div>';
-  return `
-    <div class="analytics-table-wrap">
-      <table class="analytics-table">
-        <thead><tr><th>Closed by</th><th>Closed</th><th>Share</th><th>Completed</th><th>Canceled</th><th>Abandoned</th><th>Rejected</th><th>Median</th><th>P90</th></tr></thead>
-        <tbody>
-          ${model.closers.map((row) => `
-            <tr>
-              <td class="analytics-person ${row.key === "__missing__" ? "is-missing" : ""}">${escapeHtml(row.name)}</td>
-              <td>${row.count}</td>
-              <td>${formatAnalyticsPercent((row.count / model.summary.terminalCount) * 100)}</td>
-              <td>${row.completed}</td>
-              <td>${row.canceled}</td>
-              <td>${row.abandoned}</td>
-              <td>${row.rejected}</td>
-              <td>${formatAnalyticsDays(row.medianResolution)}</td>
-              <td>${formatAnalyticsDays(row.p90Resolution)}</td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
 function renderPriorityPanel(model) {
   const rows = [
     { label: "Created high priority", value: String(model.priority.created) },
@@ -1302,11 +1251,6 @@ function renderHighlights(model) {
       label: "Oldest open ticket",
       value: analyticsTicketLabel(highlights.oldestOpen),
       note: highlights.oldestOpen ? `${formatAnalyticsDays(highlights.oldestOpen.days)} open at period end` : "No open tickets"
-    },
-    {
-      label: "Highest closure volume",
-      value: highlights.busiestCloser?.name || "—",
-      note: highlights.busiestCloser ? pluralize(highlights.busiestCloser.count, "closure") : "No closure data"
     }
   ];
 
@@ -1325,38 +1269,8 @@ function getAnalyticsSettings() {
     grouping: el.analyticsGrouping.value,
     status: el.analyticsStatus.value,
     priority: el.analyticsPriority.value,
-    creator: el.analyticsCreator.value,
-    closer: el.analyticsCloser.value,
     today: todayInputValue()
   };
-}
-
-function syncAnalyticsPersonSelect(select, people, allLabel) {
-  const selectedValue = select.value || "all";
-  select.replaceChildren();
-  select.add(new Option(allLabel, "all"));
-  people.forEach((person) => {
-    select.add(new Option(`${person.label} (${person.count})`, person.key));
-  });
-  select.value = [...select.options].some((option) => option.value === selectedValue)
-    ? selectedValue
-    : "all";
-}
-
-function syncAnalyticsPersonFilters() {
-  const analytics = window.FoxTicketAnalytics;
-  if (!analytics) return;
-  const tickets = getTickets();
-  syncAnalyticsPersonSelect(
-    el.analyticsCreator,
-    analytics.collectPeople(tickets, "createdBy"),
-    "All creators"
-  );
-  syncAnalyticsPersonSelect(
-    el.analyticsCloser,
-    analytics.collectPeople(tickets, "closedBy"),
-    "All closers"
-  );
 }
 
 function renderAnalytics() {
@@ -1374,9 +1288,7 @@ function renderAnalytics() {
   const groupingLabel = `${model.period.grouping[0].toUpperCase()}${model.period.grouping.slice(1)}ly`;
   const activeFilters = [
     model.settings.status !== "all",
-    model.settings.priority !== "all",
-    model.settings.creator !== "all",
-    model.settings.closer !== "all"
+    model.settings.priority !== "all"
   ].filter(Boolean).length;
   el.analyticsScope.textContent = `${periodStart} to ${periodEnd} · ${groupingLabel} trend · ${pluralize(model.totalTickets, "ticket")} in repository scope${activeFilters ? ` · ${activeFilters} active filters` : ""}`;
 
@@ -1386,7 +1298,7 @@ function renderAnalytics() {
       description: "All tickets matching the current filters",
       value: formatAnalyticsNumber(model.totalTickets),
       comparison: { text: "Current filtered dataset", className: "" },
-      technicalDefinition: "Total tickets in tickets.json after applying status, priority, creator, and closer filters."
+      technicalDefinition: "Total tickets in tickets.json after applying status and priority filters."
     },
     {
       label: "Tickets created",
@@ -1516,16 +1428,6 @@ function renderAnalytics() {
         ${renderQualityPanel(model)}
       </article>
 
-      <article class="analytics-panel analytics-span-6">
-        ${renderAnalyticsPanelHeader("Demand by creator", "Who submitted tickets and how their cohort progressed")}
-        ${renderCreatorTable(model)}
-      </article>
-
-      <article class="analytics-panel analytics-span-6">
-        ${renderAnalyticsPanelHeader("Closure performance", "Who closed tickets and how quickly successful work was completed")}
-        ${renderCloserTable(model)}
-      </article>
-
       <article class="analytics-panel analytics-span-12">
         ${renderAnalyticsPanelHeader("Operational highlights", "Extremes and pressure points in the selected period")}
         ${renderHighlights(model)}
@@ -1543,7 +1445,6 @@ function renderAnalytics() {
 
 function openAnalytics() {
   state.analyticsOpen = true;
-  syncAnalyticsPersonFilters();
   renderAnalytics();
   el.analyticsView.classList.remove("hidden");
   document.body.classList.add("analytics-open");
@@ -1563,8 +1464,6 @@ function resetAnalyticsFilters() {
   el.analyticsGrouping.value = "auto";
   el.analyticsStatus.value = "all";
   el.analyticsPriority.value = "all";
-  el.analyticsCreator.value = "all";
-  el.analyticsCloser.value = "all";
   renderAnalytics();
 }
 
@@ -1678,7 +1577,6 @@ function render() {
   setMutationControlsDisabled(!state.repositoryReady || state.isSaving);
   el.analyticsBtn.disabled = !state.repositoryReady;
   if (state.analyticsOpen) {
-    syncAnalyticsPersonFilters();
     renderAnalytics();
   }
   scheduleDetailsTrackSync(selectedTicket?.id ?? "");
@@ -2101,9 +1999,7 @@ el.resetAnalyticsBtn.addEventListener("click", resetAnalyticsFilters);
   el.analyticsRange,
   el.analyticsGrouping,
   el.analyticsStatus,
-  el.analyticsPriority,
-  el.analyticsCreator,
-  el.analyticsCloser
+  el.analyticsPriority
 ].forEach((control) => {
   control.addEventListener("change", renderAnalytics);
 });

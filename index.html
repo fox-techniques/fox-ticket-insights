@@ -285,7 +285,7 @@
         <div>
           <div class="analytics-kicker">Service Team Performance</div>
           <h1 id="analyticsTitle">Ticket Operations Dashboard</h1>
-          <p>Volume, throughput, resolution, backlog, ownership, and data quality from the repository dataset.</p>
+          <p>Volume, throughput, resolution, backlog, priority, and data quality from the repository dataset.</p>
         </div>
         <button id="closeAnalyticsBtn" class="analytics-close" type="button" aria-label="Close analytics">Close</button>
       </header>
@@ -331,20 +331,6 @@
             <option value="all" selected>All priorities</option>
             <option value="high">High priority</option>
             <option value="standard">Standard</option>
-          </select>
-        </label>
-
-        <label class="analytics-filter">
-          <span>Created by</span>
-          <select id="analyticsCreator">
-            <option value="all">All creators</option>
-          </select>
-        </label>
-
-        <label class="analytics-filter">
-          <span>Closed by</span>
-          <select id="analyticsCloser">
-            <option value="all">All closers</option>
           </select>
         </label>
 

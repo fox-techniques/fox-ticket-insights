@@ -91,8 +91,6 @@ test("the app hydrates and opens, filters, and closes the analytics dashboard", 
   getElement("analyticsGrouping").value = "auto";
   getElement("analyticsStatus").value = "all";
   getElement("analyticsPriority").value = "all";
-  getElement("analyticsCreator").value = "all";
-  getElement("analyticsCloser").value = "all";
   getElement("ticketStatus").value = "inprogress";
   getElement("detailsStatus").value = "inprogress";
 
@@ -166,7 +164,7 @@ test("the app hydrates and opens, filters, and closes the analytics dashboard", 
   assert.match(dashboardHtml, /Average open age/);
   assert.match(dashboardHtml, /analytics-kpi-description/);
   assert.match(dashboardHtml, /Ticket flow/);
-  assert.match(dashboardHtml, /Closure performance/);
+  assert.doesNotMatch(dashboardHtml, /Demand by creator|Closure performance|Highest closure volume|Created by missing|Closed by missing/);
 
   getElement("analyticsPriority").value = "high";
   getElement("analyticsPriority").dispatch("change");
