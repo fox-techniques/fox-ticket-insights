@@ -1,10 +1,10 @@
-# fox-ticket-tracker
+# fox-ticket-insights
 
-Static ticket tracker built in the same visual style as `fox-time-tracker`.
+Static ticket insights.
 
 ## Features
 
-- Create ticket entries with title, creator, closer, submitted date, completed date, status, details, change reason, and expected benefit
+- Create ticket entries with title, submitted date, completed date, status, details, change reason, and expected benefit
 - Unique ticket ID validation across create, edit, and CSV import
 - Rectangular ticket cards
 - `In Progress` status uses yellow

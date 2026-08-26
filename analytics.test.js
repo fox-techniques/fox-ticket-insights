@@ -9,8 +9,6 @@ function ticket(overrides) {
     id: overrides.ticketCode,
     ticketCode: overrides.ticketCode,
     title: overrides.ticketCode,
-    createdBy: "",
-    closedBy: "",
     submittedDate: "2026-08-02",
     completedDate: "",
     status: "inprogress",
@@ -29,53 +27,41 @@ function ticket(overrides) {
 const dataset = [
   ticket({
     ticketCode: "A",
-    createdBy: "Alice",
-    closedBy: "Bob",
     submittedDate: "2026-08-02",
     completedDate: "2026-08-04",
     status: "completed"
   }),
   ticket({
     ticketCode: "B",
-    createdBy: "Alice",
     submittedDate: "2026-08-10",
     highPriority: true
   }),
   ticket({
     ticketCode: "C",
-    createdBy: "Carol",
-    closedBy: "Dana",
     submittedDate: "2026-08-15",
     completedDate: "2026-08-17",
     status: "canceled"
   }),
   ticket({
     ticketCode: "D",
-    createdBy: "Evan",
-    closedBy: "Bob",
     submittedDate: "2026-07-01",
     completedDate: "2026-08-20",
     status: "completed"
   }),
   ticket({
     ticketCode: "E",
-    createdBy: "Grace",
-    closedBy: "Erin",
     submittedDate: "2026-08-18",
     completedDate: "2026-08-19",
     status: "rejected"
   }),
   ticket({
     ticketCode: "F",
-    createdBy: "Hugo",
-    closedBy: "Frank",
     submittedDate: "2026-08-20",
     completedDate: "2026-08-22",
     status: "abandoned"
   }),
   ticket({
     ticketCode: "G",
-    createdBy: "Ivy",
     submittedDate: "2026-05-01",
     status: "waiting"
   })
@@ -149,8 +135,6 @@ test("priority and status filters constrain the complete dashboard model", () =>
 test("data quality identifies missing reporting fields", () => {
   const incomplete = [ticket({
     ticketCode: "MISSING",
-    createdBy: "",
-    closedBy: "",
     completedDate: "2026-08-03",
     status: "completed",
     changeReason: "",

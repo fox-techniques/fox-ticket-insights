@@ -87,9 +87,6 @@ function validateTickets(tickets, statusCode = 400) {
     if (typeof ticket.title !== "string" || !ticket.title.trim()) {
       throw new ApiError(statusCode, `${label} must have a non-empty title.`);
     }
-    if (typeof ticket.createdBy !== "string" || typeof ticket.closedBy !== "string") {
-      throw new ApiError(statusCode, `${label} has invalid creator or closer fields.`);
-    }
     if (!VALID_STATUSES.has(ticket.status)) {
       throw new ApiError(statusCode, `${label} has an invalid status.`);
     }
@@ -135,6 +132,17 @@ function validateTickets(tickets, statusCode = 400) {
         throw new ApiError(statusCode, `${noteLabel} has invalid content.`);
       }
     });
+  });
+}
+
+function removeIdentityFields(tickets) {
+  if (!Array.isArray(tickets)) return tickets;
+  return tickets.map((ticket) => {
+    if (!ticket || typeof ticket !== "object" || Array.isArray(ticket)) return ticket;
+    const sanitized = { ...ticket };
+    delete sanitized.createdBy;
+    delete sanitized.closedBy;
+    return sanitized;
   });
 }
 
@@ -303,8 +311,9 @@ async function handleApi(req, res) {
     }
 
     try {
-      validateTickets(payload);
-      const store = await replaceTickets(payload, req.headers["if-match"] || "");
+      const sanitizedPayload = removeIdentityFields(payload);
+      validateTickets(sanitizedPayload);
+      const store = await replaceTickets(sanitizedPayload, req.headers["if-match"] || "");
       res.setHeader("ETag", store.version);
       sendJson(res, 200, store.tickets);
     } catch (error) {
@@ -343,5 +352,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, async () => {
   await ensureDataFile();
-  console.log(`FOX Ticket Tracker running at http://${HOST}:${PORT}`);
+  console.log(`FOX Ticket Insights running at http://${HOST}:${PORT}`);
 });

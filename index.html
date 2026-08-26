@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FOX Ticket Tracker</title>
+  <title>FOX Tickets Insight</title>
   <link rel="icon" type="image/png" href="favicon.png?v=20260325" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
     <div class="title">
-      <h1>FOX Ticket Tracker</h1>
+      <h1>FOX Ticket Insights</h1>
       <div class="title-actions">
         <div class="status" id="status">No tickets yet</div>
         <button id="analyticsBtn" class="analytics-launch" type="button">View Analytics</button>
@@ -42,18 +42,6 @@
             <span class="field-label">Title</span>
             <input id="ticketTitle" type="text" placeholder="Example: Payment page review" />
           </label>
-
-          <div class="field-grid people-grid">
-            <label class="field">
-              <span class="field-label">Created by</span>
-              <input id="ticketCreatedBy" type="text" placeholder="Name of requester or creator" />
-            </label>
-
-            <label class="field">
-              <span class="field-label">Closed by</span>
-              <input id="ticketClosedBy" type="text" placeholder="Name of person who closed it" />
-            </label>
-          </div>
 
           <div class="field-grid">
             <label class="field">
@@ -87,7 +75,7 @@
 
           <label class="field">
             <span class="field-label">Entry Details</span>
-            <textarea id="ticketDetails" rows="4" placeholder="Describe the ticket, blockers, owner notes, or next step."></textarea>
+            <textarea id="ticketDetails" rows="4" placeholder="Describe the ticket, blockers, context, or next step."></textarea>
           </label>
 
           <label class="field">
@@ -118,7 +106,7 @@
 
           <label class="field search-field">
             <span class="field-label">Search Tickets</span>
-            <input id="ticketSearch" type="search" placeholder="Search by ID, title, people, details, or notes" />
+            <input id="ticketSearch" type="search" placeholder="Search by ID, title, details, or notes" />
           </label>
         </div>
         <div class="ticket-list" id="ticketList"></div>
@@ -185,18 +173,6 @@
               <span class="field-label">Title</span>
               <input id="detailsTitle" type="text" />
             </label>
-
-            <div class="field-grid people-grid">
-              <label class="field">
-                <span class="field-label">Created by</span>
-                <input id="detailsCreatedBy" type="text" />
-              </label>
-
-              <label class="field">
-                <span class="field-label">Closed by</span>
-                <input id="detailsClosedBy" type="text" />
-              </label>
-            </div>
 
             <div class="field-grid">
               <label class="field">

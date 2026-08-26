@@ -1,6 +1,6 @@
 # ✨ Contributing Guidelines  
 
-We welcome all contributions, including pull requests, bug reports, and discussions. Thank you for helping improve **FOX Ticket Tracker**!
+We welcome all contributions, including pull requests, bug reports, and discussions. Thank you for helping improve **FOX Ticket Insights**!
 
 ## 📜 Code of Conduct  
 
@@ -105,4 +105,4 @@ By making a contribution to this project, I certify that:
 
 ---
 
-🙌 Thank you for contributing to **FOX Ticket Tracker**!
+🙌 Thank you for contributing to **FOX Ticket Insights**!

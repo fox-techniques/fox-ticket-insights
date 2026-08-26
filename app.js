@@ -5,8 +5,6 @@ const CSV_EXPORT_HEADERS = [
   "id",
   "ticketCode",
   "title",
-  "createdBy",
-  "closedBy",
   "status",
   "highPriority",
   "submittedDate",
@@ -24,8 +22,6 @@ const CSV_HEADER_ALIASES = {
   id: ["id"],
   ticketCode: ["ticketcode", "ticketid"],
   title: ["title"],
-  createdBy: ["createdby", "creator", "requester"],
-  closedBy: ["closedby", "closer"],
   status: ["status"],
   highPriority: ["highpriority"],
   submittedDate: ["submitteddate", "datesubmitted"],
@@ -103,8 +99,6 @@ const el = {
   showArchivedState: $("showArchivedState"),
   ticketCode: $("ticketCode"),
   ticketTitle: $("ticketTitle"),
-  ticketCreatedBy: $("ticketCreatedBy"),
-  ticketClosedBy: $("ticketClosedBy"),
   ticketSubmitted: $("ticketSubmitted"),
   ticketSubmittedDisplay: $("ticketSubmittedDisplay"),
   ticketCompleted: $("ticketCompleted"),
@@ -135,8 +129,6 @@ const el = {
   detailsId: $("detailsId"),
   detailsCode: $("detailsCode"),
   detailsTitle: $("detailsTitle"),
-  detailsCreatedBy: $("detailsCreatedBy"),
-  detailsClosedBy: $("detailsClosedBy"),
   detailsSubmitted: $("detailsSubmitted"),
   detailsSubmittedDisplay: $("detailsSubmittedDisplay"),
   detailsCompleted: $("detailsCompleted"),
@@ -397,8 +389,6 @@ function normalizeTicket(ticket) {
     ticketCode: normalizeTicketCode(ticket?.ticketCode),
     highPriority: parseBoolean(ticket?.highPriority),
     title: String(ticket?.title ?? "").trim() || "Untitled Ticket",
-    createdBy: String(ticket?.createdBy ?? "").trim(),
-    closedBy: String(ticket?.closedBy ?? "").trim(),
     submittedDate: normalizeDateString(ticket?.submittedDate) || todayInputValue(),
     completedDate: normalizeDateString(ticket?.completedDate),
     status: normalizeStatus(ticket?.status),
@@ -635,8 +625,6 @@ function getTicketSearchBlob(ticket) {
   return [
     ticket.ticketCode,
     ticket.title,
-    ticket.createdBy,
-    ticket.closedBy,
     getStatusConfig(ticket.status).label,
     ticket.details,
     ticket.changeReason,
@@ -687,8 +675,6 @@ function getSelectedTicket(tickets, showArchived, searchQuery) {
 function clearCreateForm() {
   el.ticketCode.value = "";
   el.ticketTitle.value = "";
-  el.ticketCreatedBy.value = "";
-  el.ticketClosedBy.value = "";
   el.ticketSubmitted.value = todayInputValue();
   el.ticketCompleted.value = "";
   el.ticketStatus.value = "inprogress";
@@ -781,8 +767,6 @@ function buildTicketFromCreateForm() {
     ticketCode,
     highPriority: false,
     title,
-    createdBy: el.ticketCreatedBy.value.trim(),
-    closedBy: el.ticketClosedBy.value.trim(),
     submittedDate,
     completedDate: safeCompletedDate,
     status,
@@ -823,8 +807,6 @@ function renderDetails(ticket) {
     el.detailsId.value = "";
     el.detailsCode.value = "";
     el.detailsTitle.value = "";
-    el.detailsCreatedBy.value = "";
-    el.detailsClosedBy.value = "";
     el.detailsSubmitted.value = todayInputValue();
     el.detailsCompleted.value = "";
     el.detailsStatus.value = "inprogress";
@@ -849,8 +831,6 @@ function renderDetails(ticket) {
   el.detailsId.value = ticket.id;
   el.detailsCode.value = ticket.ticketCode;
   el.detailsTitle.value = ticket.title;
-  el.detailsCreatedBy.value = ticket.createdBy;
-  el.detailsClosedBy.value = ticket.closedBy;
   el.detailsSubmitted.value = ticket.submittedDate;
   el.detailsCompleted.value = ticket.completedDate;
   el.detailsStatus.value = ticket.status;
@@ -867,8 +847,6 @@ function renderDetails(ticket) {
   const archivedText = ticket.archived ? "Yes" : "No";
   el.detailsMeta.textContent = [
     `Ticket ID ${ticket.ticketCode || "—"}`,
-    `Created by ${ticket.createdBy || "—"}`,
-    `Closed by ${ticket.closedBy || "—"}`,
     `High Priority ${ticket.highPriority ? "Yes" : "No"}`,
     `Submitted ${formatDisplayDate(ticket.submittedDate)}`,
     `Completed ${formatDisplayDate(ticket.completedDate)}`,
@@ -911,8 +889,6 @@ function buildTicketCard(ticket, selectedId) {
           <div class="ticket-meta">
             <span>Submitted: ${escapeHtml(formatDisplayDate(ticket.submittedDate))}</span>
             <span>Completed: ${escapeHtml(formatDisplayDate(ticket.completedDate))}</span>
-            <span>Created by: ${escapeHtml(ticket.createdBy || "—")}</span>
-            <span>Closed by: ${escapeHtml(ticket.closedBy || "—")}</span>
             <span>${pluralize(ticket.notes.length, "note")}${archivedLabel}</span>
           </div>
         </div>
@@ -1610,8 +1586,6 @@ function exportTicketsCsv() {
       ticket.id,
       ticket.ticketCode,
       ticket.title,
-      ticket.createdBy,
-      ticket.closedBy,
       ticket.status,
       ticket.highPriority ? "true" : "false",
       ticket.submittedDate,
@@ -1627,7 +1601,7 @@ function exportTicketsCsv() {
   }
 
   const csv = `\uFEFF${rows.map((row) => row.map(escapeCsv).join(",")).join("\r\n")}`;
-  downloadFile(`fox-ticket-tracker_${todayInputValue()}.csv`, csv, "text/csv;charset=utf-8");
+  downloadFile(`fox-ticket-insights_${todayInputValue()}.csv`, csv, "text/csv;charset=utf-8");
 }
 
 function parseCsv(text) {
@@ -1767,8 +1741,6 @@ function buildImportedTickets(rows) {
       id: ticketId,
       ticketCode,
       title,
-      createdBy: getCsvCell(row, headerIndex, "createdBy"),
-      closedBy: getCsvCell(row, headerIndex, "closedBy"),
       status,
       highPriority: parseBoolean(getCsvCell(row, headerIndex, "highPriority")),
       submittedDate,
@@ -1893,8 +1865,6 @@ async function saveSelectedTicket() {
       ...ticket,
       ticketCode,
       title,
-      createdBy: el.detailsCreatedBy.value.trim(),
-      closedBy: el.detailsClosedBy.value.trim(),
       submittedDate,
       completedDate: safeCompletedDate,
       status,
