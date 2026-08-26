@@ -10,6 +10,8 @@
     "completedDate": "",
     "status": "inprogress",
     "details": "Hello",
+    "changeReason": "",
+    "expectedBenefit": "",
     "archived": false,
     "createdAt": 1787769111637,
     "updatedAt": 1787769185807,

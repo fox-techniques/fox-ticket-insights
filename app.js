@@ -13,6 +13,8 @@ const CSV_EXPORT_HEADERS = [
   "completedDate",
   "archived",
   "details",
+  "changeReason",
+  "expectedBenefit",
   "notes",
   "createdAt",
   "updatedAt"
@@ -30,6 +32,8 @@ const CSV_HEADER_ALIASES = {
   completedDate: ["completeddate", "datecompleted"],
   archived: ["archived"],
   details: ["details", "entrydetails"],
+  changeReason: ["changereason", "reasonofthechange", "reasonforchange"],
+  expectedBenefit: ["expectedbenefit", "benefit"],
   notes: ["notes"],
   createdAt: ["createdat"],
   updatedAt: ["updatedat"]
@@ -92,6 +96,8 @@ const el = {
   ticketCompletedDisplay: $("ticketCompletedDisplay"),
   ticketStatus: $("ticketStatus"),
   ticketDetails: $("ticketDetails"),
+  ticketChangeReason: $("ticketChangeReason"),
+  ticketExpectedBenefit: $("ticketExpectedBenefit"),
   addTicketBtn: $("addTicketBtn"),
   importCsvBtn: $("importCsvBtn"),
   exportCsvBtn: $("exportCsvBtn"),
@@ -120,6 +126,8 @@ const el = {
   detailsCompletedDisplay: $("detailsCompletedDisplay"),
   detailsStatus: $("detailsStatus"),
   detailsText: $("detailsText"),
+  detailsChangeReason: $("detailsChangeReason"),
+  detailsExpectedBenefit: $("detailsExpectedBenefit"),
   detailsStatusBadge: $("detailsStatusBadge"),
   detailsDayCount: $("detailsDayCount"),
   saveTicketBtn: $("saveTicketBtn"),
@@ -366,6 +374,8 @@ function normalizeTicket(ticket) {
     completedDate: normalizeDateString(ticket?.completedDate),
     status: normalizeStatus(ticket?.status),
     details: String(ticket?.details ?? "").trim(),
+    changeReason: String(ticket?.changeReason ?? "").trim(),
+    expectedBenefit: String(ticket?.expectedBenefit ?? "").trim(),
     archived: parseBoolean(ticket?.archived),
     createdAt: typeof ticket?.createdAt === "number" && Number.isFinite(ticket.createdAt)
       ? ticket.createdAt
@@ -600,6 +610,8 @@ function getTicketSearchBlob(ticket) {
     ticket.closedBy,
     getStatusConfig(ticket.status).label,
     ticket.details,
+    ticket.changeReason,
+    ticket.expectedBenefit,
     ...ticket.notes.map((note) => note.text)
   ].join("\n").toLowerCase();
 }
@@ -650,6 +662,8 @@ function clearCreateForm() {
   el.ticketCompleted.value = "";
   el.ticketStatus.value = "inprogress";
   el.ticketDetails.value = "";
+  el.ticketChangeReason.value = "";
+  el.ticketExpectedBenefit.value = "";
   syncAllDateDisplays();
 }
 
@@ -742,6 +756,8 @@ function buildTicketFromCreateForm() {
     completedDate: safeCompletedDate,
     status,
     details: el.ticketDetails.value.trim(),
+    changeReason: el.ticketChangeReason.value.trim(),
+    expectedBenefit: el.ticketExpectedBenefit.value.trim(),
     archived: false,
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -782,6 +798,8 @@ function renderDetails(ticket) {
     el.detailsCompleted.value = "";
     el.detailsStatus.value = "inprogress";
     el.detailsText.value = "";
+    el.detailsChangeReason.value = "";
+    el.detailsExpectedBenefit.value = "";
     el.noteText.value = "";
     el.detailsMeta.textContent = "";
     el.detailsStatusBadge.className = "badge badge-muted";
@@ -806,6 +824,8 @@ function renderDetails(ticket) {
   el.detailsCompleted.value = ticket.completedDate;
   el.detailsStatus.value = ticket.status;
   el.detailsText.value = ticket.details;
+  el.detailsChangeReason.value = ticket.changeReason;
+  el.detailsExpectedBenefit.value = ticket.expectedBenefit;
 
   updateDetailsPriorityVisual({
     status: ticket.status,
@@ -1047,6 +1067,8 @@ function exportTicketsCsv() {
       ticket.completedDate,
       ticket.archived ? "true" : "false",
       ticket.details,
+      ticket.changeReason,
+      ticket.expectedBenefit,
       JSON.stringify(ticket.notes),
       String(ticket.createdAt),
       String(ticket.updatedAt)
@@ -1202,6 +1224,8 @@ function buildImportedTickets(rows) {
       completedDate: safeCompletedDate,
       archived: parseBoolean(getCsvCell(row, headerIndex, "archived")),
       details: getCsvCell(row, headerIndex, "details"),
+      changeReason: getCsvCell(row, headerIndex, "changeReason"),
+      expectedBenefit: getCsvCell(row, headerIndex, "expectedBenefit"),
       notes: parseNotesCell(getCsvCell(row, headerIndex, "notes")),
       createdAt,
       updatedAt
@@ -1324,6 +1348,8 @@ async function saveSelectedTicket() {
       completedDate: safeCompletedDate,
       status,
       details: el.detailsText.value.trim(),
+      changeReason: el.detailsChangeReason.value.trim(),
+      expectedBenefit: el.detailsExpectedBenefit.value.trim(),
       updatedAt: Date.now()
     });
   });

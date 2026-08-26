@@ -106,8 +106,10 @@ function validateTickets(tickets, statusCode = 400) {
     if (ticket.completedDate && ticket.completedDate < ticket.submittedDate) {
       throw new ApiError(statusCode, `${label} has a completedDate before its submittedDate.`);
     }
-    if (typeof ticket.details !== "string") {
-      throw new ApiError(statusCode, `${label} has invalid details.`);
+    if (typeof ticket.details !== "string"
+      || typeof ticket.changeReason !== "string"
+      || typeof ticket.expectedBenefit !== "string") {
+      throw new ApiError(statusCode, `${label} has invalid descriptive fields.`);
     }
     if (!Number.isFinite(ticket.createdAt) || !Number.isFinite(ticket.updatedAt)) {
       throw new ApiError(statusCode, `${label} has invalid timestamps.`);
